@@ -1,0 +1,73 @@
+# Publie le dossier docs/ sur l'hébergement web OVHcloud, en SFTP, à chaque mise à jour du site.
+#
+# Réglages (Settings > Secrets and variables > Actions), jamais écrits dans ce dépôt :
+#   secrets   OVH_SFTP_HOST      serveur FTP/SFTP de l'hébergement (onglet « FTP - SSH » de l'espace client)
+#             OVH_SFTP_USER      login FTP (avec la case SFTP cochée dans ce même onglet)
+#             OVH_SFTP_PASSWORD  mot de passe FTP
+#   variable  OVH_TARGET_DIR     dossier de destination sur l'hébergement (par défaut : www/rm)
+#
+# Sans ces secrets, le workflow s'arrête proprement sans rien envoyer.
+# Les fichiers sont ajoutés ou remplacés ; rien n'est supprimé sur le serveur.
+
+name: Publier sur l'hébergement OVHcloud
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/deploy-ovh.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ovh
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SFTP_HOST: ${{ secrets.OVH_SFTP_HOST }}
+      SFTP_USER: ${{ secrets.OVH_SFTP_USER }}
+      LFTP_PASSWORD: ${{ secrets.OVH_SFTP_PASSWORD }}
+      TARGET_DIR: ${{ vars.OVH_TARGET_DIR || 'www/rm' }}
+    steps:
+      - name: Vérifier la configuration
+        id: check
+        run: |
+          if [ -z "$SFTP_HOST" ] || [ -z "$SFTP_USER" ] || [ -z "$LFTP_PASSWORD" ]; then
+            echo "::warning::Secrets OVH_SFTP_HOST, OVH_SFTP_USER ou OVH_SFTP_PASSWORD absents : publication ignorée."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Garde-fou : ne jamais écraser la racine du site (page d'accueil du domaine).
+          case "${TARGET_DIR%/}" in
+            ""|"."|"/"|"www"|"./www"|"/www")
+              echo "::error::Dossier cible refusé (« $TARGET_DIR ») : indiquez un sous-dossier, par exemple www/rm."
+              exit 1 ;;
+          esac
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Récupérer le site
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/checkout@v4
+
+      - name: Installer lftp
+        if: steps.check.outputs.ready == 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Envoyer docs/ en SFTP
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          lftp --env-password -u "$SFTP_USER" "sftp://$SFTP_HOST" -e "
+            set sftp:auto-confirm yes;
+            set net:timeout 20; set net:max-retries 3; set net:reconnect-interval-base 5;
+            mkdir -p -f '$TARGET_DIR';
+            mirror --reverse --parallel=4 --exclude-glob .nojekyll docs/ '$TARGET_DIR';
+            cls -1 '$TARGET_DIR';
+            bye"
+          echo "Publication terminée : $(find docs -type f ! -name .nojekyll | wc -l) fichiers dans $TARGET_DIR" >> "$GITHUB_STEP_SUMMARY"

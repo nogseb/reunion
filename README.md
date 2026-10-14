@@ -85,7 +85,17 @@ Points d'attention :
 
 ### Héberger sur un domaine personnel (Apache, OVHcloud)
 
-Copier le **contenu** du dossier `docs/` (y compris `.htaccess`, fichier caché) dans le sous-dossier choisi, par exemple `/rm/`, via FTP ou le gestionnaire de fichiers.
+**Publication automatique (recommandée).** Le workflow `.github/workflows/deploy-ovh.yml` envoie `docs/` en SFTP à chaque modification poussée sur `main`, ou à la demande (onglet Actions → « Publier sur l'hébergement OVHcloud » → Run workflow).
+
+1. Espace client OVHcloud → Web Cloud → Hébergements → onglet **FTP - SSH** : cocher la case **SFTP** du login FTP, relever le serveur et le login.
+2. Onglet **Multisite** : vérifier que le certificat SSL (Let's Encrypt) est actif pour le domaine. Indispensable pour un domaine en `.app`, que les navigateurs n'ouvrent qu'en HTTPS.
+3. GitHub → Settings → Secrets and variables → Actions :
+   - secrets `OVH_SFTP_HOST`, `OVH_SFTP_USER`, `OVH_SFTP_PASSWORD` ;
+   - variable `OVH_TARGET_DIR` si le dossier cible n'est pas `www/rm`.
+
+Le workflow ajoute ou remplace des fichiers, n'en supprime jamais, et refuse d'écrire à la racine `www`.
+
+**Publication manuelle.** Copier le **contenu** du dossier `docs/` (y compris `.htaccess`, fichier caché) dans le sous-dossier choisi avec un logiciel FTP (FileZilla, Cyberduck).
 
 ## Crédits et licences
 
