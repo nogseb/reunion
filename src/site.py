@@ -351,7 +351,9 @@ html = (tpl.replace("/*__MAPLIBRE_CSS__*/", css)
 ROBOTS = '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">'
 
 # Fragment publié comme artefact Claude (le squelette HTML est ajouté à la publication).
-open("reunion-maurice-2027.html", "w").write(ROBOTS + "\n" + html)
+# L'artefact Claude ne permet pas les téléchargements : lien MP3 retiré de cette version (lecture seule).
+frag = re.sub(r'<a class="pod-dl"[^>]*>.*?</a>', '', html)
+open("reunion-maurice-2027.html", "w").write(ROBOTS + "\n" + frag)
 
 # Version autonome (dossier docs/, pour GitHub Pages ou un hébergement web) : document HTML complet,
 # avec titre, balise robots, polices et styles dans <head>.
