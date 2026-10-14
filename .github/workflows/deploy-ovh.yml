@@ -1,13 +1,14 @@
-# Publie le dossier docs/ sur l'hébergement web OVHcloud, en SFTP, à chaque mise à jour du site.
+# Publie le dossier docs/ sur l'hébergement web OVHcloud à chaque mise à jour du site.
 #
 # Réglages (Settings > Secrets and variables > Actions), jamais écrits dans ce dépôt :
 #   secrets   OVH_SFTP_HOST      serveur FTP/SFTP de l'hébergement (onglet « FTP - SSH » de l'espace client)
-#             OVH_SFTP_USER      login FTP (avec la case SFTP cochée dans ce même onglet)
+#             OVH_SFTP_USER      login FTP
 #             OVH_SFTP_PASSWORD  mot de passe FTP
 #   variable  OVH_TARGET_DIR     dossier de destination sur l'hébergement (par défaut : www/rm)
 #
-# Sans ces secrets, le workflow s'arrête proprement sans rien envoyer.
-# Les fichiers sont ajoutés ou remplacés ; rien n'est supprimé sur le serveur.
+# Protocole : SFTP (chiffré) si le login l'autorise, sinon FTP avec chiffrement TLS quand le serveur le propose.
+# Le dossier de destination est créé s'il n'existe pas. Les fichiers sont ajoutés ou remplacés ; rien n'est supprimé.
+# Chaque étape écrit son résultat en annotation (visible sur la page du run), les secrets restant masqués.
 
 name: Publier sur l'hébergement OVHcloud
 
@@ -29,7 +30,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     env:
       SFTP_HOST: ${{ secrets.OVH_SFTP_HOST }}
       SFTP_USER: ${{ secrets.OVH_SFTP_USER }}
@@ -60,14 +61,62 @@ jobs:
         if: steps.check.outputs.ready == 'true'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Envoyer docs/ en SFTP
+      - name: Tester la connexion
+        id: probe
         if: steps.check.outputs.ready == 'true'
         run: |
-          lftp --env-password -u "$SFTP_USER" "sftp://$SFTP_HOST" -e "
-            set sftp:auto-confirm yes;
+          set +e
+          # Tolère un préfixe (sftp://, ftp://), un port ou une barre finale saisis par erreur dans le secret.
+          HOST="${SFTP_HOST#*://}"; HOST="${HOST%%/*}"; HOST="${HOST%%:*}"; HOST="$(echo "$HOST" | tr -d '[:space:]')"
+          echo "host=$HOST" >> "$GITHUB_OUTPUT"
+          if ! getent hosts "$HOST" >/dev/null; then
+            echo "::error title=Serveur introuvable::Le nom du serveur (secret OVH_SFTP_HOST) ne correspond à aucune adresse. Attendu : ftp.clusterXXX.hosting.ovh.net"
+            exit 1
+          fi
+          P22=fermé; P21=fermé
+          timeout 10 bash -c "</dev/tcp/$HOST/22" 2>/dev/null && P22=ouvert
+          timeout 10 bash -c "</dev/tcp/$HOST/21" 2>/dev/null && P21=ouvert
+          echo "::notice title=Réseau::Serveur trouvé ; port 22 (SFTP) $P22, port 21 (FTP) $P21."
+
+          SSH_OPTS="ssh -a -x -o ConnectTimeout=15 -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR"
+          try_sftp() { timeout 60 lftp --env-password -u "$SFTP_USER" "sftp://$HOST" -e "set net:timeout 15; set net:max-retries 1; set sftp:connect-program '$SSH_OPTS'; cls -1; bye" 2>&1; }
+          try_ftp()  { timeout 60 lftp --env-password -u "$SFTP_USER" "ftp://$HOST"  -e "set net:timeout 15; set net:max-retries 1; set ftp:ssl-allow yes; set ssl:verify-certificate no; set ftp:passive-mode yes; cls -1; bye" 2>&1; }
+
+          PROTO=""
+          if [ "$P22" = ouvert ]; then
+            OUT="$(try_sftp)"; RC=$?
+            if [ $RC -eq 0 ]; then PROTO=sftp
+            else echo "::warning title=SFTP refusé::$(echo "$OUT" | tail -n 2 | tr '\n' ' ' | cut -c1-300) (code $RC). Vérifier que la case SFTP est cochée pour ce login chez OVH."; fi
+          fi
+          if [ -z "$PROTO" ] && [ "$P21" = ouvert ]; then
+            OUT="$(try_ftp)"; RC=$?
+            if [ $RC -eq 0 ]; then PROTO=ftp
+            else echo "::error title=FTP refusé::$(echo "$OUT" | tail -n 2 | tr '\n' ' ' | cut -c1-300) (code $RC). Vérifier le login et le mot de passe FTP."; fi
+          fi
+          if [ -z "$PROTO" ]; then
+            echo "::error title=Connexion impossible::Aucun accès SFTP ni FTP n'a abouti avec ces identifiants."
+            exit 1
+          fi
+          ROOT="$(echo "$OUT" | grep -v '^\s*$' | tr '\n' ' ' | cut -c1-300)"
+          echo "::notice title=Connexion réussie::Protocole $PROTO. Contenu de la racine de l'hébergement : $ROOT"
+          echo "proto=$PROTO" >> "$GITHUB_OUTPUT"
+
+      - name: Envoyer docs/
+        if: steps.check.outputs.ready == 'true'
+        env:
+          HOST: ${{ steps.probe.outputs.host }}
+          PROTO: ${{ steps.probe.outputs.proto }}
+        run: |
+          SSH_OPTS="ssh -a -x -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR"
+          set -o pipefail
+          timeout 480 lftp --env-password -u "$SFTP_USER" "$PROTO://$HOST" -e "
+            set cmd:fail-exit yes;
             set net:timeout 20; set net:max-retries 3; set net:reconnect-interval-base 5;
+            set sftp:connect-program '$SSH_OPTS';
+            set ftp:ssl-allow yes; set ssl:verify-certificate no; set ftp:passive-mode yes;
             mkdir -p -f '$TARGET_DIR';
-            mirror --reverse --parallel=4 --exclude-glob .nojekyll docs/ '$TARGET_DIR';
-            cls -1 '$TARGET_DIR';
-            bye"
-          echo "Publication terminée : $(find docs -type f ! -name .nojekyll | wc -l) fichiers dans $TARGET_DIR" >> "$GITHUB_STEP_SUMMARY"
+            mirror --reverse --parallel=4 --verbose=1 --exclude-glob .nojekyll docs/ '$TARGET_DIR';
+            bye" 2>&1 | tee lftp.log | tail -n 20
+          N=$(grep -c "Transferring file" lftp.log || true)
+          echo "::notice title=Publication terminée::$N fichiers envoyés en $PROTO dans $TARGET_DIR."
+          echo "Publication terminée : $N fichiers envoyés en $PROTO dans $TARGET_DIR" >> "$GITHUB_STEP_SUMMARY"
