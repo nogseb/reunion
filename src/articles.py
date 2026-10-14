@@ -3,6 +3,54 @@
 
 ARTICLES = [
     dict(
+        slug="maurice-histoire",
+        file="../contenus/Maurice_une_ile_sans_peuple_premier.md",
+        theme="Histoire",
+        dest="Maurice",
+        links=[
+            ("j3", "Mahébourg et Grand Port : arrivée des Néerlandais, bataille de 1810"),
+            ("j8", "Port-Louis, la capitale de La Bourdonnais"),
+            ("j11", "Pamplemousses, le jardin de Pierre Poivre"),
+            ("j12", "Cap Malheureux, débarquement britannique de 1810"),
+        ],
+        note=None,
+    ),
+    dict(
+        slug="morne-aapravasi",
+        file="../contenus/Le_Morne_et_l_Aapravasi_Ghat.md",
+        theme="Histoire et mémoire",
+        dest="Maurice",
+        links=[
+            ("j4", "Le Morne et le monument de la Route de l'esclave"),
+            ("j5", "Grand Bassin, héritage des engagés indiens"),
+            ("j8", "L'Aapravasi Ghat, le quai des engagés"),
+        ],
+        note=None,
+    ),
+    dict(
+        slug="dodo-ebony",
+        file="../contenus/Du_dodo_a_Ebony_Forest.md",
+        theme="Nature",
+        dest="Maurice",
+        links=[
+            ("j3", "Blue Bay ; en option, l'île aux Aigrettes"),
+            ("j4", "Ebony Forest, la forêt restaurée"),
+            ("j5", "Gorges de Rivière Noire et Plaine Champagne"),
+        ],
+        note=None,
+    ),
+    dict(
+        slug="le-clezio",
+        file="../contenus/Le_Clezio_et_Maurice.md",
+        theme="Littérature",
+        dest="Maurice",
+        links=[
+            ("j8", "La Maison Eurêka, demeure perdue de la famille Le Clézio"),
+            ("j10", "Île Plate et îlot Gabriel, décor de La Quarantaine (variante)"),
+        ],
+        note=None,
+    ),
+    dict(
         slug="genese",
         file="../contenus/La_Reunion_De_la_genese_a_nos_jours.md",
         theme="Histoire et nature",
