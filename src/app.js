@@ -267,6 +267,7 @@
       showPage('loin'); openEssay(m[1]); window.scrollTo(0, 0);
       return;
     }
+    if (h === 'logements' || h === 'demandes') { showPage('suivi'); selectTab('lg'); window.scrollTo(0, 0); return; }
     h = ALIAS[h] || h;
     if (PAGES.indexOf(h) < 0) h = 'accueil';
     if (h === 'loin') { showPage('loin'); openEssay(null); window.scrollTo(0, 0); return; }
@@ -283,6 +284,39 @@
     } catch (e) { showPage('jours'); select(id, { scroll: true, fly: true }); }
   }
   window.addEventListener('hashchange', route);
+
+  /* Onglets de la page Suivi : réservations ou demandes de logement (choix mémorisé sur l'appareil) */
+  var TABKEY = 'rm2027-suivi-onglet';
+  function selectTab(name, focus) {
+    var tabs = $$('.tabs [role="tab"]');
+    if (!tabs.some(function (b) { return b.dataset.tab === name; })) name = 'resa';
+    tabs.forEach(function (b) {
+      var on = b.dataset.tab === name;
+      b.setAttribute('aria-selected', String(on));
+      b.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !on;
+      if (on && focus) b.focus();
+    });
+    store(TABKEY, name);
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.tabs [role="tab"]') : null;
+    if (b) selectTab(b.dataset.tab);
+  });
+  document.addEventListener('keydown', function (e) {
+    var b = e.target.closest ? e.target.closest('.tabs [role="tab"]') : null;
+    if (!b) return;
+    var tabs = $$('.tabs [role="tab"]'), i = tabs.indexOf(b), j = -1;
+    if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') j = 0;
+    else if (e.key === 'End') j = tabs.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    selectTab(tabs[j].dataset.tab, true);
+  });
+  selectTab(store(TABKEY) || 'resa');
 
   /* Une ligne du tableau ouvre la journée */
   document.addEventListener('click', function (e) {

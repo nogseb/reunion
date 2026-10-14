@@ -214,6 +214,13 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 .resa-day{appearance:none; border:0; background:none; padding:0; text-align:left; cursor:pointer; min-height:44px; display:block; min-width:0}
 .resa-day .d{display:block; font-family:var(--f-mono); font-size:.75rem; color:var(--ink-2)}
 .resa-day .t{display:block; font-weight:700; line-height:1.3; color:var(--ink)}
+/* Onglets de la page Suivi */
+.tabs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; margin-top:20px; padding:3px; background:var(--surface); border:1px solid var(--rule); border-radius:14px}
+.tabs button{min-height:44px; padding:6px 10px; border:0; border-radius:11px; background:transparent; color:var(--ink); font-size:.9rem; line-height:1.2; cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink); color:var(--paper); font-weight:700}
+.tabs button:not([aria-selected="true"]):hover{background:var(--tint)}
+.tab-panel.section{padding-top:16px}
+@media (min-width:600px){ .tabs{display:inline-grid; grid-template-columns:auto auto; border-radius:999px} .tabs button{border-radius:999px; padding:0 16px} }
 /* Demandes de logement */
 [data-s="envoyee"] .ico{border:2px solid var(--todo)}
 [data-s="acceptee"] .ico{background:var(--ok)}
@@ -438,7 +445,11 @@ __DAYS__
   </div>
 
   <div class="view" id="v-suivi" hidden>
-    <section class="section" aria-labelledby="h-resa">
+    <div class="tabs" role="tablist" aria-label="Suivi">
+      <button type="button" role="tab" id="tab-resa" data-tab="resa" aria-controls="p-resa" aria-selected="true">Réservations et arbitrages</button>
+      <button type="button" role="tab" id="tab-lg" data-tab="lg" aria-controls="p-lg" aria-selected="false" tabindex="-1">Demandes de logement</button>
+    </div>
+    <section class="section tab-panel" id="p-resa" role="tabpanel" aria-labelledby="tab-resa">
       <div class="sec-head">
         <div>
           <p class="eyebrow">Suivi</p>
@@ -448,7 +459,7 @@ __DAYS__
       <p class="sync" id="sync">Touchez un statut pour le modifier.</p>
       <div class="resa" id="resa">__RESA__</div>
     </section>
-    <section class="section" aria-labelledby="h-lg">
+    <section class="section tab-panel" id="p-lg" role="tabpanel" aria-labelledby="tab-lg" hidden>
       <div class="sec-head">
         <div>
           <p class="eyebrow">Maurice · HomeExchange en GuestPoints</p>
