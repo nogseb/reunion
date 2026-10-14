@@ -323,6 +323,11 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
 .essay-title{font-size:clamp(1.75rem, 7vw, 2.5rem); margin:6px 0 8px}
 .standfirst{margin:0; font-family:var(--f-display); font-style:italic; font-size:1.15rem; line-height:1.45; color:var(--ink-2)}
 .essay-meta{margin:10px 0 0; font-family:var(--f-mono); font-size:.74rem; color:var(--ink-2)}
+/* Version podcast d'un dossier */
+.pod{margin-top:14px; padding:12px 14px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); display:grid; gap:8px}
+.pod-h{margin:0; font-size:.92rem}
+.pod audio{width:100%; height:44px; display:block}
+.pod-dl{font-size:.88rem; justify-self:start; display:inline-flex; align-items:center; min-height:32px}
 .field{padding:12px 14px 6px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius)}
 .field h3{font-family:var(--f-mono); font-size:.7rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin:0 0 4px}
 .field ul{list-style:none; margin:0; padding:0}
@@ -729,32 +734,32 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
         </div>
       </div>
       <div id="essays-list"><div class="essays"><a class="essay-card" href="#lire-maurice-histoire">
-  <p class="meta-line">Histoire · Maurice · 6 min de lecture</p>
+  <p class="meta-line">Histoire · Maurice · 6 min de lecture · podcast 7 min</p>
   <h3>Maurice, une île sans peuple premier</h3>
   <p>De l'escale hollandaise à la République : quatre siècles pour faire un pays avec des femmes et des hommes tous venus d'ailleurs.</p>
   <span class="go">Lire le dossier</span>
 </a><a class="essay-card" href="#lire-morne-aapravasi">
-  <p class="meta-line">Histoire et mémoire · Maurice · 6 min de lecture</p>
+  <p class="meta-line">Histoire et mémoire · Maurice · 6 min de lecture · podcast 6 min</p>
   <h3>Le Morne et l'Aapravasi Ghat, la mémoire mauricienne</h3>
   <p>Une montagne de marrons et un quai d'immigration : deux sites inscrits par l'Unesco pour raconter l'esclavage, puis l'engagisme, à Maurice.</p>
   <span class="go">Lire le dossier</span>
 </a><a class="essay-card" href="#lire-dodo-ebony">
-  <p class="meta-line">Nature · Maurice · 5 min de lecture</p>
+  <p class="meta-line">Nature · Maurice · 5 min de lecture · podcast 6 min</p>
   <h3>Du dodo à Ebony Forest</h3>
   <p>Ce que Maurice a perdu en trois siècles, et ce qu'elle s'acharne à reconstruire, arbre par arbre et oiseau par oiseau.</p>
   <span class="go">Lire le dossier</span>
 </a><a class="essay-card" href="#lire-le-clezio">
-  <p class="meta-line">Littérature · Maurice · 5 min de lecture</p>
+  <p class="meta-line">Littérature · Maurice · 5 min de lecture · podcast 6 min</p>
   <h3>J.M.G. Le Clézio, Maurice en héritage</h3>
   <p>Le prix Nobel de littérature 2008 est aussi un écrivain mauricien. Ses livres font revivre la maison de famille de Moka, les îlots du nord et la mémoire de l'esclavage.</p>
   <span class="go">Lire le dossier</span>
 </a><a class="essay-card" href="#lire-genese">
-  <p class="meta-line">Histoire et nature · La Réunion · 9 min de lecture</p>
+  <p class="meta-line">Histoire et nature · La Réunion · 9 min de lecture · podcast 7 min</p>
   <h3>La Réunion, une île née du feu et façonnée par les hommes</h3>
   <p>Exposé introductif — de la genèse volcanique à l'économie contemporaine, avec le fil rouge du vivant.</p>
   <span class="go">Lire le dossier</span>
 </a><a class="essay-card" href="#lire-engagisme">
-  <p class="meta-line">Histoire et mémoire · La Réunion · 6 min de lecture</p>
+  <p class="meta-line">Histoire et mémoire · La Réunion · 6 min de lecture · podcast 7 min</p>
   <h3>Esclavage et engagisme à La Réunion</h3>
   <p>Deux systèmes de travail forcé qui ont façonné le peuplement de l'île, entre le XVIIe et le XXe siècle.</p>
   <span class="go">Lire le dossier</span>
@@ -765,6 +770,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-maurice-histoire-t">Maurice, une île sans peuple premier</h2>
     <p class="standfirst">De l'escale hollandaise à la République : quatre siècles pour faire un pays avec des femmes et des hommes tous venus d'ailleurs.</p>
     <p class="essay-meta">6 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 7 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/maurice-histoire.mp3"></audio><a class="pod-dl" href="podcasts/maurice-histoire.mp3" download>Télécharger le MP3 (3,6 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -860,6 +866,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-morne-aapravasi-t">Le Morne et l'Aapravasi Ghat, la mémoire mauricienne</h2>
     <p class="standfirst">Une montagne de marrons et un quai d'immigration : deux sites inscrits par l'Unesco pour raconter l'esclavage, puis l'engagisme, à Maurice.</p>
     <p class="essay-meta">6 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 6 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/morne-aapravasi.mp3"></audio><a class="pod-dl" href="podcasts/morne-aapravasi.mp3" download>Télécharger le MP3 (3,0 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -965,6 +972,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-dodo-ebony-t">Du dodo à Ebony Forest</h2>
     <p class="standfirst">Ce que Maurice a perdu en trois siècles, et ce qu'elle s'acharne à reconstruire, arbre par arbre et oiseau par oiseau.</p>
     <p class="essay-meta">5 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 6 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/dodo-ebony.mp3"></audio><a class="pod-dl" href="podcasts/dodo-ebony.mp3" download>Télécharger le MP3 (3,1 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -1090,6 +1098,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-le-clezio-t">J.M.G. Le Clézio, Maurice en héritage</h2>
     <p class="standfirst">Le prix Nobel de littérature 2008 est aussi un écrivain mauricien. Ses livres font revivre la maison de famille de Moka, les îlots du nord et la mémoire de l'esclavage.</p>
     <p class="essay-meta">5 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 6 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/le-clezio.mp3"></audio><a class="pod-dl" href="podcasts/le-clezio.mp3" download>Télécharger le MP3 (2,6 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -1190,6 +1199,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-genese-t">La Réunion, une île née du feu et façonnée par les hommes</h2>
     <p class="standfirst">Exposé introductif — de la genèse volcanique à l'économie contemporaine, avec le fil rouge du vivant.</p>
     <p class="essay-meta">9 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 7 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/genese.mp3"></audio><a class="pod-dl" href="podcasts/genese.mp3" download>Télécharger le MP3 (3,4 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -1286,6 +1296,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
     <h2 class="essay-title" id="a-engagisme-t">Esclavage et engagisme à La Réunion</h2>
     <p class="standfirst">Deux systèmes de travail forcé qui ont façonné le peuplement de l'île, entre le XVIIe et le XXe siècle.</p>
     <p class="essay-meta">6 min de lecture</p>
+    <div class="pod"><p class="pod-h"><b>Version podcast</b> · 7 min · deux voix de synthèse</p><audio controls preload="none" src="podcasts/engagisme.mp3"></audio><a class="pod-dl" href="podcasts/engagisme.mp3" download>Télécharger le MP3 (3,2 Mo)</a></div>
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>
@@ -1303,7 +1314,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
 <p>La traversée était meurtrière : <strong>jusqu'à 25 % des esclaves mouraient durant le voyage</strong>, et les trafiquants jetaient parfois à la mer ceux devenus trop malades pour être vendus.</p>
 <h3>La traite vers La Réunion</h3>
 <p>La traite vers l'île n'a cessé de s'amplifier au fil du XVIIIe siècle. Madagascar en fut le principal pourvoyeur pendant la période de régie de la Compagnie des Indes Orientales (CIO). À partir de 1767, les négriers se sont tournés vers les comptoirs est-africains, où les esclaves — originaires du Malawi, du lac Victoria ou du Zambèze — étaient plus nombreux et moins chers.</p>
-<p><strong>160 000 esclaves</strong> auraient été introduits aux Mascareignes entre 1670 et 1810. L'esclavage fut aboli en 1817, mais la traite s'est poursuivie clandestinement jusqu'en 1830, touchant encore 45 000 personnes. Ce n'est qu'en <strong>1848</strong> que <strong>62 000 esclaves</strong> furent définitivement libérés à La Réunion.</p>
+<p><strong>160 000 esclaves</strong> auraient été introduits aux Mascareignes entre 1670 et 1810. La traite fut interdite en 1817, mais elle s'est poursuivie clandestinement jusqu'en 1830, touchant encore 45 000 personnes. Ce n'est qu'en <strong>1848</strong> que <strong>62 000 esclaves</strong> furent définitivement libérés à La Réunion.</p>
 <hr />
 <h2>2. Être esclave : statut et conditions de vie</h2>
 <p>L'esclavage consiste à priver un être humain de sa liberté. Dépourvu de droits propres et juridiquement considéré comme un meuble, l'esclave pouvait être vendu et ne pouvait posséder de propriété — bien qu'il puisse être poursuivi pénalement comme une personne libre.</p>

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json, re, datetime as dt
+import json, os, re, datetime as dt
 from html import escape as e
 from content import DAYS, SOURCES, LABELS, LOGEMENTS, LG_ST, LG_ORDER, LG_GROUPS
 from tab import TAB, GROUPS
@@ -252,6 +252,16 @@ prat.append(f'''<article class="card"><p class="eyebrow">Urgences</p><h3>Contact
 
 # ---------- Pour aller + loin ----------
 DAYN = {f"j{d['n']}": d for d in DAYS}
+PODS = json.load(open("podcasts.json")) if os.path.exists("podcasts.json") else {}
+def pod_block(slug):
+    p = PODS.get(slug)
+    if not p:
+        return ""
+    mins = max(1, round(p["secs"] / 60))
+    size = f'{p["bytes"] / 1e6:.1f}'.replace(".", ",")
+    return (f'<div class="pod"><p class="pod-h"><b>Version podcast</b> · {mins} min · deux voix de synthèse</p>'
+            f'<audio controls preload="none" src="podcasts/{slug}.mp3"></audio>'
+            f'<a class="pod-dl" href="podcasts/{slug}.mp3" download>Télécharger le MP3 ({size} Mo)</a></div>')
 cards, essays = [], []
 for a in ARTICLES:
     src = open(a["file"], encoding="utf-8").read()
@@ -271,7 +281,7 @@ for a in ARTICLES:
         f'<span>{t(lab)}<small>{date_long(DAYN[did]["date"])}</small></span></button></li>' for did, lab in a["links"])
     note = f'<p class="essay-note">{t(a["note"])}</p>' if a.get("note") else ""
     cards.append(f'''<a class="essay-card" href="#lire-{slug}">
-  <p class="meta-line">{t(a["theme"])} · {t(a["dest"])} · {mins} min de lecture</p>
+  <p class="meta-line">{t(a["theme"])} · {t(a["dest"])} · {mins} min de lecture{(" · podcast " + str(max(1, round(PODS[slug]["secs"] / 60))) + " min") if slug in PODS else ""}</p>
   <h3>{t(title)}</h3>
   <p>{t(stand)}</p>
   <span class="go">Lire le dossier</span>
@@ -283,6 +293,7 @@ for a in ARTICLES:
     <h2 class="essay-title" id="a-{slug}-t">{t(title)}</h2>
     <p class="standfirst">{t(stand)}</p>
     <p class="essay-meta">{mins} min de lecture</p>
+    {pod_block(slug)}
   </header>
   <aside class="field" aria-label="Sur le terrain">
     <h3>Sur le terrain pendant le séjour</h3>

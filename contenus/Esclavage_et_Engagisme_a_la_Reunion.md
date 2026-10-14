@@ -22,7 +22,7 @@ La traversée était meurtrière : **jusqu'à 25 % des esclaves mouraient durant
 
 La traite vers l'île n'a cessé de s'amplifier au fil du XVIIIe siècle. Madagascar en fut le principal pourvoyeur pendant la période de régie de la Compagnie des Indes Orientales (CIO). À partir de 1767, les négriers se sont tournés vers les comptoirs est-africains, où les esclaves — originaires du Malawi, du lac Victoria ou du Zambèze — étaient plus nombreux et moins chers.
 
-**160 000 esclaves** auraient été introduits aux Mascareignes entre 1670 et 1810. L'esclavage fut aboli en 1817, mais la traite s'est poursuivie clandestinement jusqu'en 1830, touchant encore 45 000 personnes. Ce n'est qu'en **1848** que **62 000 esclaves** furent définitivement libérés à La Réunion.
+**160 000 esclaves** auraient été introduits aux Mascareignes entre 1670 et 1810. La traite fut interdite en 1817, mais elle s'est poursuivie clandestinement jusqu'en 1830, touchant encore 45 000 personnes. Ce n'est qu'en **1848** que **62 000 esclaves** furent définitivement libérés à La Réunion.
 
 ---
 

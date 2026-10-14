@@ -104,3 +104,13 @@ Le workflow ajoute ou remplace des fichiers, n'en supprime jamais, et refuse d'�
 - Carte : MapLibre GL JS 4.7.1, licence BSD-3-Clause, chargée depuis jsDelivr (repli unpkg).
 - Polices : Spectral, Atkinson Hyperlegible, IBM Plex Mono (Google Fonts, licence SIL OFL).
 - Informations pratiques : sources et dates de vérification listées dans la page (Infos → Sources).
+
+## Podcasts des dossiers
+
+Chaque dossier de « Pour aller + loin » existe en version audio (dialogue à deux voix de synthèse, 5 à 8 minutes) :
+
+- scripts : `contenus/podcasts/<slug>.txt`, une réplique par ligne, préfixée `A:` (voix féminine) ou `B:` (voix masculine) ;
+- génération : `cd src && python3 podcast_build.py [slug]` (synthèse hors ligne avec sherpa-onnx et les voix Piper `fr_FR-siwis-medium` et `fr_FR-tom-medium`, normalisation et MP3 64 kbit/s par ffmpeg) ;
+- sortie : `docs/podcasts/<slug>.mp3` et `src/podcasts.json` (durées), puis `python3 site.py` pour mettre à jour les lecteurs.
+
+Prérequis : `pip install sherpa-onnx soundfile numpy`, ffmpeg, et les voix téléchargées depuis les versions GitHub « tts-models » du projet sherpa-onnx (`VOICES_DIR` pour indiquer leur dossier).
