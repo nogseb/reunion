@@ -285,6 +285,61 @@
   }
   window.addEventListener('hashchange', route);
 
+  /* ---------------- Quiz de fin de dossier ---------------- */
+  function quizScore(q) {
+    var items = $$('.qz', q);
+    var done = items.filter(function (li) { return li.dataset.done; }).length;
+    if (done < items.length) return;
+    var good = items.filter(function (li) { return li.dataset.res === 'ok'; }).length;
+    var msg = good === items.length ? 'parfait, vous êtes prêts pour le voyage.'
+      : good >= 3 ? "bien retenu. Un coup d'œil au dossier pour les détails ?"
+      : 'réécoutez le podcast ou relisez le dossier avant le départ.';
+    $('.qz-score', q).textContent = 'Score : ' + good + ' sur ' + items.length + ', ' + msg;
+    $('.qz-end', q).hidden = false;
+  }
+  function quizAnswer(btn) {
+    var li = btn.closest('.qz');
+    if (!li || li.dataset.done) return;
+    var ok = +li.dataset.ok, i = +btn.dataset.i, good = i === ok, okText = '';
+    li.dataset.done = '1';
+    li.dataset.res = good ? 'ok' : 'ko';
+    $$('.qz-o', li).forEach(function (b) {
+      var k = +b.dataset.i;
+      b.disabled = true;
+      if (k === ok) { b.classList.add('is-ok'); okText = b.lastElementChild.textContent; }
+      if (k === i) { b.setAttribute('aria-pressed', 'true'); if (!good) b.classList.add('is-ko'); }
+    });
+    var why = $('.qz-why', li);
+    $('.qz-v', why).textContent = good ? 'Bonne réponse.' : 'Pas tout à fait. Réponse : ' + okText + '.';
+    why.hidden = false;
+    quizScore(li.closest('.quiz'));
+  }
+  function quizReset(q) {
+    $$('.qz', q).forEach(function (li) {
+      delete li.dataset.done; delete li.dataset.res;
+      $$('.qz-o', li).forEach(function (b) { b.disabled = false; b.classList.remove('is-ok', 'is-ko'); b.removeAttribute('aria-pressed'); });
+      $('.qz-why', li).hidden = true;
+    });
+    $('.qz-end', q).hidden = true;
+    q.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    var first = $('.qz-o', q);
+    if (first) first.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest) return;
+    var jump = e.target.closest('.qz-jump');
+    if (jump) {
+      e.preventDefault();
+      var target = document.getElementById(jump.getAttribute('href').slice(1));
+      if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+    var o = e.target.closest('.qz-o');
+    if (o) { quizAnswer(o); return; }
+    var r = e.target.closest('.qz-reset');
+    if (r) quizReset(r.closest('.quiz'));
+  });
+
   /* Onglets de la page Suivi : réservations ou demandes de logement (choix mémorisé sur l'appareil) */
   var TABKEY = 'rm2027-suivi-onglet';
   function selectTab(name, focus) {

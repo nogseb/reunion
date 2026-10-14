@@ -4,6 +4,8 @@ from html import escape as e
 from content import DAYS, SOURCES, LABELS, LOGEMENTS, LG_ST, LG_ORDER, LG_GROUPS
 from tab import TAB, GROUPS
 from articles import ARTICLES
+from quiz import QUIZ
+import random
 import markdown
 
 GEO = json.load(open("geo.json"))
@@ -262,6 +264,25 @@ def pod_block(slug):
     return (f'<div class="pod"><p class="pod-h"><b>Version podcast</b> · {mins} min · deux voix de synthèse</p>'
             f'<audio controls preload="none" src="podcasts/{slug}.mp3"></audio>'
             f'<a class="pod-dl" href="podcasts/{slug}.mp3" download>Télécharger le MP3 ({size} Mo)</a></div>')
+LETTERS = "ABCD"
+def quiz_block(slug):
+    qs = QUIZ.get(slug)
+    if not qs:
+        return ""
+    items = []
+    for i, x in enumerate(qs):
+        opts = [x["r"]] + x["f"]
+        random.Random(f"{slug}-{i}-50").shuffle(opts)  # graine choisie pour répartir les bonnes réponses entre A, B, C et D
+        ok = opts.index(x["r"])
+        btns = "".join(f'<button type="button" class="qz-o" data-i="{k}"><span class="qz-l" aria-hidden="true">{LETTERS[k]}</span><span>{t(o)}</span></button>' for k, o in enumerate(opts))
+        items.append(f'<li class="qz" data-ok="{ok}"><p class="qz-q" id="qz-{slug}-{i}">{t(x["q"])}</p>'
+                     f'<div class="qz-opts" role="group" aria-labelledby="qz-{slug}-{i}">{btns}</div>'
+                     f'<p class="qz-why" aria-live="polite" hidden><b class="qz-v"></b> {t(x["why"])}</p></li>')
+    return (f'<section class="quiz" id="quiz-{slug}" data-quiz="{slug}" aria-labelledby="quiz-{slug}-t">'
+            f'<p class="eyebrow">Avez-vous bien retenu ?</p><h3 id="quiz-{slug}-t">Le quiz du dossier <span class="qz-n">{len(qs)} questions</span></h3>'
+            f'<ol class="qz-list">{"".join(items)}</ol>'
+            f'<div class="qz-end" hidden><p class="qz-score" aria-live="polite"></p>'
+            f'<button type="button" class="btn-ghost qz-reset">Recommencer le quiz</button></div></section>')
 cards, essays = [], []
 for a in ARTICLES:
     src = open(a["file"], encoding="utf-8").read()
@@ -292,7 +313,7 @@ for a in ARTICLES:
     <p class="eyebrow">{t(a["theme"])} · {t(a["dest"])}</p>
     <h2 class="essay-title" id="a-{slug}-t">{t(title)}</h2>
     <p class="standfirst">{t(stand)}</p>
-    <p class="essay-meta">{mins} min de lecture</p>
+    <p class="essay-meta">{mins} min de lecture{(' · <a href="#quiz-' + slug + '" class="qz-jump">quiz de ' + str(len(QUIZ[slug])) + ' questions en fin de dossier</a>') if slug in QUIZ else ""}</p>
     {pod_block(slug)}
   </header>
   <aside class="field" aria-label="Sur le terrain">
@@ -301,6 +322,7 @@ for a in ARTICLES:
   </aside>
   <div class="essay-body">{html_body}</div>
   {note}
+  {quiz_block(slug)}
   <a class="btn-ghost essay-back" href="#loin">Tous les dossiers</a>
 </article>''')
 loin_html = ('<div id="essays-list"><div class="essays">' + "".join(cards) + '</div>'

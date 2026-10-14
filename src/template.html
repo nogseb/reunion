@@ -316,6 +316,26 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
 .essay-title{font-size:clamp(1.75rem, 7vw, 2.5rem); margin:6px 0 8px}
 .standfirst{margin:0; font-family:var(--f-display); font-style:italic; font-size:1.15rem; line-height:1.45; color:var(--ink-2)}
 .essay-meta{margin:10px 0 0; font-family:var(--f-mono); font-size:.74rem; color:var(--ink-2)}
+/* Quiz de fin de dossier */
+.quiz{margin-top:28px; padding:16px 14px 18px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); scroll-margin-top:calc(var(--nav-h) + 12px)}
+.quiz h3{font-size:1.25rem; margin:4px 0 14px}
+.qz-n{font-family:var(--f-mono); font-size:.74rem; font-weight:400; color:var(--ink-2); margin-left:4px; white-space:nowrap}
+.qz-list{margin:0; padding-left:1.3em; display:grid; gap:20px}
+.qz-q{margin:0 0 8px; font-weight:700; line-height:1.35}
+.qz-opts{display:grid; gap:6px}
+.qz-o{display:flex; gap:10px; align-items:flex-start; width:100%; min-height:44px; padding:9px 12px; text-align:left; border:1px solid var(--rule); border-radius:var(--radius); background:var(--paper); color:var(--ink); font-size:.95rem; line-height:1.35; cursor:pointer}
+.qz-o:hover:not(:disabled){border-color:var(--accent)}
+.qz-l{flex:none; font-family:var(--f-mono); font-weight:600; color:var(--ink-2)}
+.qz-o:disabled{cursor:default}
+.qz-o:disabled:not(.is-ok):not(.is-ko){opacity:.55}
+.qz-o.is-ok{border-color:var(--ok); box-shadow:inset 4px 0 0 var(--ok)}
+.qz-o.is-ok .qz-l{color:var(--ok)}
+.qz-o.is-ko{border-color:var(--run); box-shadow:inset 4px 0 0 var(--run)}
+.qz-o.is-ko .qz-l{color:var(--run)}
+.qz-why{margin:8px 0 0; font-size:.92rem; color:var(--ink-2)}
+.qz-v{color:var(--ink)}
+.qz-end{margin-top:18px; display:grid; gap:10px; justify-items:start}
+.qz-score{margin:0; font-weight:700; font-size:1.05rem}
 /* Version podcast d'un dossier */
 .pod{margin-top:14px; padding:12px 14px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); display:grid; gap:8px}
 .pod-h{margin:0; font-size:.92rem}
