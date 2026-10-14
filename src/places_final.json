@@ -408,5 +408,12 @@
 "lon": 55.4475,
 "lat": -20.8865,
 "name": "Jardin de l'État, Saint-Denis"
+},
+"ambre": {
+"isl": "maurice",
+"lon": 57.6856,
+"lat": -20.0392,
+"name": "Île d'Ambre",
+"sea": true
 }
 }

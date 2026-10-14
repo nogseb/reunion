@@ -43,6 +43,7 @@
   "coindemire": {"isl": "maurice", "lon": 57.6270, "lat": -19.9440, "name": "Coin de Mire", "sea": true},
   "ileplate": {"isl": "maurice", "lon": 57.6530, "lat": -19.8800, "name": "Île Plate", "sea": true},
   "gabriel": {"isl": "maurice", "lon": 57.6560, "lat": -19.8920, "name": "Îlot Gabriel", "sea": true},
+  "ambre": {"isl": "maurice", "lon": 57.6856, "lat": -20.0392, "name": "Île d'Ambre", "sea": true},
   "troubiches": {"isl": "maurice", "lon": 57.5450, "lat": -20.0350, "name": "Trou aux Biches", "coast": true},
   "pereybere": {"isl": "maurice", "lon": 57.5880, "lat": -19.9970, "name": "Pereybère", "coast": true},
   "labourdonnais": {"isl": "maurice", "lon": 57.6300, "lat": -20.0740, "name": "Château de Labourdonnais"},

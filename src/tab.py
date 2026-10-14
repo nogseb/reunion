@@ -22,7 +22,7 @@ TAB = {
     8: [("Maison Eurêka", "j8-eureka"), ("Aapravasi Ghat", "j8-aapravasi"), ("Marché central", None), ("Caudan", None),
         ("Installation côte nord", "j8-basenord")],
     9: [("Île aux Cerfs en navette lente", None), ("Kayak en bonus, si mer calme", "j9-kayak"), ("Plages de Belle Mare et Palmar", None)],
-    10: [("Îlots du nord en catamaran", "j10-ilots"), ("Coin de Mire, île Plate, îlot Gabriel", None), ("Pereybère", None)],
+    10: [("Île d'Ambre en kayak de mer", "j10-ambre"), ("Pereybère", None), ("Variante : îlots du nord en bateau rapide", "j10-ilots")],
     11: [("Pamplemousses", None), ("L'Aventure du Sucre", None), ("La Table du Château", "j11-table"),
          ("Château de Labourdonnais", "j11-labourdonnais"), ("Dîner à Grand Baie", None)],
     12: [("Messe à Cap Malheureux", "j12-messe"), ("Trou aux Biches", None), ("Vol vers La Réunion", "j12-vol")],
