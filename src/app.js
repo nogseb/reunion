@@ -89,16 +89,61 @@
 
   var chains = {};
   function queueWrite(id, v) {
+    var path = id.indexOf('/') === -1 ? 'statuts/' + id : id;
     var p = (chains[id] || Promise.resolve()).catch(function () {}).then(function () {
-      return db.doc('statuts/' + id).set({ s: v, t: Date.now() });
+      return db.doc(path).set({ s: v, t: Date.now() });
     });
     chains[id] = p;
     return p;
   }
 
+  /* ---------------- Demandes de logement (HomeExchange) ---------------- */
+  var LGST = TRIP.lgst || {};
+  var lgById = {};
+  (TRIP.logements || []).forEach(function (x) { lgById[x.id] = x; });
+  var lgOver = {};
+  var LSL = 'rm2027-logements';
+  function lgGet() { try { return JSON.parse(store(LSL) || '{}') || {}; } catch (e) { return {}; } }
+  function lgStatus(id) { return lgOver[id] || (lgById[id] && lgById[id].s); }
+  function applyLg() {
+    $$('.st[data-lg]').forEach(function (el) {
+      var s = lgStatus(el.dataset.lg);
+      el.dataset.s = s;
+      var sel = $('select', el);
+      if (sel && sel.value !== s) sel.value = s;
+      var t = $('.st-txt', el);
+      if (t) t.textContent = LGST[s];
+      var li = el.closest('.lg-item');
+      if (li) li.dataset.s = s;
+    });
+    $$('.lg-group').forEach(function (g) {
+      var n = $$('.lg-item', g).filter(function (li) { return li.dataset.s !== 'ecartee' && li.dataset.s !== 'refusee'; }).length;
+      var c = $('h3 .n', g);
+      if (c) c.textContent = n;
+    });
+  }
+  function lgChange(sel) {
+    var id = sel.closest('.st').dataset.lg;
+    var v = sel.value;
+    var prev = lgStatus(id);
+    if (readOnly || !lgById[id] || !LGST[v]) { sel.value = prev; return; }
+    lgOver[id] = v;
+    applyLg();
+    if (mode === 'db') {
+      queueWrite('logements/' + id, v).catch(function (err) {
+        lgOver[id] = prev;
+        applyLg();
+        if (err && err.code === 'invalid_argument') { readOnly = true; setSync('ro'); } else { setSync('err'); }
+      });
+    } else {
+      var o = lgGet(); o[id] = v; store(LSL, JSON.stringify(o));
+    }
+  }
+
   document.addEventListener('change', function (e) {
     var sel = e.target.closest ? e.target.closest('.st select') : null;
     if (!sel) return;
+    if (sel.closest('.st').dataset.lg) { lgChange(sel); return; }
     var id = sel.closest('.st').dataset.act;
     var v = sel.value;
     var prev = statusOf(id);
@@ -119,7 +164,9 @@
   function useLocal() {
     mode = 'local';
     overrides = lsGet();
+    lgOver = lgGet();
     applyStatuses();
+    applyLg();
     setSync('local');
   }
 
@@ -136,6 +183,12 @@
           overrides = o;
           applyStatuses();
         }, function () { useLocal(); });
+        db.collection('logements').onSnapshot(function (snap) {
+          var o = {};
+          snap.docs.forEach(function (d) { var v = d.data(); if (v && LGST[v.s] && lgById[d.id]) o[d.id] = v.s; });
+          lgOver = o;
+          applyLg();
+        }, function () {});
       } catch (e) { useLocal(); }
     }).catch(useLocal);
   }

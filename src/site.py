@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json, re, datetime as dt
 from html import escape as e
-from content import DAYS, SOURCES, LABELS
+from content import DAYS, SOURCES, LABELS, LOGEMENTS, LG_ST, LG_ORDER, LG_GROUPS
 from tab import TAB, GROUPS
 from articles import ARTICLES
 import markdown
@@ -148,6 +148,33 @@ for k in ORDER:
     resa.append(h + "</div>")
 
 
+# ---------- Logements à Maurice (page Suivi) ----------
+def lg_control(lid, s, label):
+    opts = "".join(f'<option value="{k}"{" selected" if k == s else ""}>{LG_ST[k]}</option>' for k in LG_ORDER)
+    return (f'<label class="st" data-lg="{lid}" data-s="{s}"><span class="ico" aria-hidden="true"></span>'
+            f'<span class="st-txt">{LG_ST[s]}</span><span class="st-caret" aria-hidden="true"></span>'
+            f'<select aria-label="Demande : {e(label)}">{opts}</select></label>')
+
+lg_html = []
+for g, glabel, gnote in LG_GROUPS:
+    items = [x for x in LOGEMENTS if x["g"] == g]
+    lis = []
+    for x in items:
+        if x["debut"]:
+            n = (dt.date.fromisoformat(x["fin"]) - dt.date.fromisoformat(x["debut"])).days
+            dates = f'{date_short(x["debut"])} → {date_short(x["fin"])} · {n} nuits'
+        else:
+            dates = "Sans demande"
+        lis.append(
+            f'<li class="lg-item" data-lg-item="{x["id"]}" data-s="{x["s"]}">'
+            f'<div class="lg-body"><p class="lg-h"><b>{t(x["hote"])}</b><span>{t(x["lieu"])}</span></p>'
+            f'<p class="lg-d mono">{dates}</p><p class="lg-n">{t(x["note"])}</p>'
+            f'<a class="lg-a" href="{x["url"]}" target="_blank" rel="noopener noreferrer">Voir l\'annonce HomeExchange</a></div>'
+            f'{lg_control(x["id"], x["s"], x["hote"] + ", " + x["lieu"])}</li>')
+    lg_html.append(f'<div class="resa-group lg-group"><h3>{t(glabel)} <span class="n">{len([x for x in items if x["s"] != "ecartee"])}</span></h3>'
+                   f'<p class="lg-gn">{t(gnote)}</p><ul class="resa-list lg-list">{"".join(lis)}</ul></div>')
+logements_html = "".join(lg_html)
+
 # ---------- Vue tableau ----------
 act_s = {a["id"]: a["s"] for a in acts_json}
 tab_rows = ['<thead><tr><th scope="col">Jour</th><th scope="col">Programme</th><th scope="col" class="c-eff">Effort</th></tr></thead>']
@@ -282,6 +309,7 @@ for k in ("reunion", "maurice", "sea"):
 trip = dict(
     days=[dict(id=f"j{d['n']}", n=d["n"], date=d["date"], short=date_short(d["date"]), title=d["title"], isl=d["isl"], pts=d["pts"]) for d in DAYS],
     acts=acts_json, places=places, labels=labels,
+    logements=[dict(id=x["id"], s=x["s"], hote=x["hote"]) for x in LOGEMENTS], lgst=LG_ST,
 )
 geo_out = dict(islands={k: dict(land=v["land"], waterlines=v["waterlines"], bounds=v["bounds"]) for k, v in GEO["islands"].items()}, svg=GEO["svg"])
 geo_out["terrain"] = json.load(open("terrain_index.json"))
@@ -300,6 +328,7 @@ html = (tpl.replace("/*__MAPLIBRE_CSS__*/", css)
         .replace("__LOIN__", loin_html)
         .replace("__DAYS__", "\n".join(days_html))
         .replace("__RESA__", "".join(resa))
+        .replace("__LOGEMENTS__", logements_html)
         .replace("__PRATIQUE__", "".join(prat))
         .replace("__SOURCES__", "".join(srcs))
         .replace("__TRIP_JSON__", safe_json(trip))

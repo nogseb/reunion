@@ -214,6 +214,24 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 .resa-day{appearance:none; border:0; background:none; padding:0; text-align:left; cursor:pointer; min-height:44px; display:block; min-width:0}
 .resa-day .d{display:block; font-family:var(--f-mono); font-size:.75rem; color:var(--ink-2)}
 .resa-day .t{display:block; font-weight:700; line-height:1.3; color:var(--ink)}
+/* Demandes de logement */
+[data-s="envoyee"] .ico{border:2px solid var(--todo)}
+[data-s="acceptee"] .ico{background:var(--ok)}
+[data-s="refusee"] .ico{background:var(--ink-2); border-radius:2px}
+[data-s="ecartee"] .ico{border:2px dashed var(--opt)}
+.st[data-s="envoyee"]{color:var(--todo)} .st[data-s="acceptee"]{color:var(--ok)} .st[data-s="refusee"]{color:var(--ink-2)} .st[data-s="ecartee"]{color:var(--opt)}
+.lg-gn{margin:0 0 8px; color:var(--ink-2); font-size:.9rem}
+.lg-list li{align-items:start}
+.lg-body{min-width:0; display:grid; gap:2px}
+.lg-h{margin:0; line-height:1.3}
+.lg-h b{display:block}
+.lg-h span{color:var(--ink-2); font-size:.92rem}
+.lg-d{margin:2px 0 0; font-size:.78rem; color:var(--ink-2)}
+.lg-n{margin:2px 0 0; font-size:.9rem}
+.lg-a{font-size:.88rem; display:inline-flex; align-items:center; min-height:32px}
+.lg-item[data-s="refusee"] .lg-body, .lg-item[data-s="ecartee"] .lg-body{opacity:.6}
+.lg-item[data-s="acceptee"]{box-shadow:inset 3px 0 0 var(--ok)}
+@media (max-width:420px){ .lg-list li{grid-template-columns:minmax(0,1fr)} .lg-list .st{justify-self:start} }
 .resa-empty{margin:0; padding:10px 12px; color:var(--ink-2); font-size:.9rem; background:var(--surface); border:1px dashed var(--rule); border-radius:var(--radius)}
 
 /* Pratique */
@@ -429,6 +447,16 @@ __DAYS__
       </div>
       <p class="sync" id="sync">Touchez un statut pour le modifier.</p>
       <div class="resa" id="resa">__RESA__</div>
+    </section>
+    <section class="section" aria-labelledby="h-lg">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Maurice · HomeExchange en GuestPoints</p>
+          <h2 id="h-lg">Demandes de logement</h2>
+        </div>
+      </div>
+      <p class="sync">Demandes envoyées le 14 octobre 2026. Les dates de la maison 2 dépendent de la maison 1 retenue. Touchez un statut pour le mettre à jour.</p>
+      <div class="resa lg">__LOGEMENTS__</div>
     </section>
   </div>
 

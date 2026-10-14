@@ -323,3 +323,41 @@ LABELS = {
         ("Océan Indien", 56.55, -20.95, "ocean"),
     ],
 }
+
+# ---------- Logements à Maurice : demandes HomeExchange (page Suivi) ----------
+# Prénoms des hôtes et commune uniquement, jamais d'adresse. Statut modifiable depuis la page.
+LG_ST = {"envoyee": "Demande envoyée", "acceptee": "Acceptée", "refusee": "Refusée", "ecartee": "Écartée"}
+LG_ORDER = ["envoyee", "acceptee", "refusee", "ecartee"]
+LG_GROUPS = [
+    (1, "Maison 1 · ouest et sud", "Arrivée le vendredi 21 mai vers 16 h."),
+    (2, "Maison 2 · nord et est", "Départ le dimanche 30 mai ; vol à 18 h 20, départ tardif demandé."),
+]
+LOGEMENTS = [
+    dict(id="lg-ayesha", g=1, hote="Ayesha", lieu="La Gaulette", debut="2027-05-21", fin="2027-05-27", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/2915027",
+         note="Minimum 6 nuits : la maison 2 passerait au 27 mai (3 nuits). En espèces : ménage 62 € et taxe touristique 72 €. Deux lits king size ; eau rationnée."),
+    dict(id="lg-kamaya", g=1, hote="Alice et Alex", lieu="Chamarel (Villa Kamaya)", debut="2027-05-21", fin="2027-05-26", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/3182390",
+         note="Ménage 100 € à partir de 5 nuits. Programme inchangé. Nombre de chambres à vérifier."),
+    dict(id="lg-belombre", g=1, hote="Joanna et Robert", lieu="Bel Ombre (domaine de Valriche)", debut="2027-05-21", fin="2027-05-26", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/3214356",
+         note="Message en anglais. Villa avec piscine, accès golf et club de plage. Chambres, frais et GuestPoints à vérifier."),
+    dict(id="lg-josephine", g=1, hote="Josephine", lieu="Le Morne (plage de la Prairie)", debut="2027-05-21", fin="2027-05-28", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/2881303",
+         note="Minimum 7 nuits : la maison 2 passerait au 28 mai (2 nuits). Femme de ménage tous les jours sauf le dimanche."),
+    dict(id="lg-melanie", g=1, hote="Melanie", lieu="Pointe d'Esny", debut="2027-05-21", fin="2027-05-26", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/3239196",
+         note="Message en anglais. Maison de week-end avec piscine, près de Blue Bay ; environ 1 h de route vers le Morne et Chamarel."),
+    dict(id="lg-rochesnoires", g=2, hote="Raphaele et Christophe", lieu="Roches Noires", debut="2027-05-26", fin="2027-05-30", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/2875135",
+         note="Bord de mer, 4 chambres. Modalités de la cuisinière et femme de ménage demandées. Île d'Ambre à un quart d'heure."),
+    dict(id="lg-brigitte", g=2, hote="Brigitte", lieu="Grand Baie (Mont Choisy)", debut="2027-05-26", fin="2027-05-30", s="envoyee",
+         url="https://www.homeexchange.fr/homes/view/1732981",
+         note="3 chambres avec salle de bain, ménage 150 €. GuestPoints sans doute élevés."),
+    dict(id="lg-anahita", g=2, hote="Anahita (resort de golf)", lieu="Beau Champ", debut="", fin="", s="ecartee",
+         url="https://www.homeexchange.fr/homes/view/2689240",
+         note="Écartée : 8 nuits minimum, services en sus d'environ 50 € par jour."),
+    dict(id="lg-elodie", g=2, hote="Elodie et Simon", lieu="Trou d'Eau Douce", debut="", fin="", s="ecartee",
+         url="https://www.homeexchange.fr/homes/view/2447894",
+         note="Écartée : pas disponible en mai."),
+]
