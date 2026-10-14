@@ -1,0 +1,10 @@
+# Données sources volumineuses (à retélécharger, voir README)
+src/dem/
+
+# Sorties intermédiaires et contrôles visuels
+src/reunion-maurice-2027.html
+src/preview.html
+src/*.png
+__pycache__/
+*.pyc
+.DS_Store

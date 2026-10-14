@@ -1,0 +1,479 @@
+<title>Réunion et Maurice 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+/* Carnet de bord mobile d'abord : une colonne, carte collée sous la barre de navigation ;
+   au-delà de 960 px, journal à gauche et carte fixe à droite. */
+:root{
+  --paper:#F0F4F3; --surface:#FFFFFF; --ink:#11232B; --ink-2:#4B636E; --rule:#D0DBDC; --tint:#E3ECEC;
+  --accent:#125C8A; --accent-ink:#FFFFFF;
+  --run:#A3432D; --mru:#0D7880; --transit:#7D9099;
+  --sea:#D3E6EA; --land:#E9EEE2; --coast:#5C7C75; --route:#125C8A; --route-faint:#7F9BA6;
+  --ok:#2C784C; --todo:#A2560F; --opt:#5A6A7D; --tbd:#7044AC;
+  --halo:rgba(240,244,243,.92);
+  --hs-shadow:#3F5A52; --hs-light:rgba(255,255,255,.6);
+  --f-display:"Spectral", Georgia, "Times New Roman", serif;
+  --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --nav-h:52px; --gutter:16px; --map-h:clamp(220px, 38vh, 380px); --radius:6px;
+}
+@supports (height:1svh){ :root{ --map-h:clamp(220px, 38svh, 380px); } }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0B1920; --surface:#11242D; --ink:#E3ECEE; --ink-2:#9AB0B8; --rule:#22404B; --tint:#16303A;
+  --accent:#7BC0E5; --accent-ink:#06202C;
+  --run:#E88F74; --mru:#52C3C4; --transit:#6E838C;
+  --sea:#0A2230; --land:#1B2F28; --coast:#6E9F93; --route:#7BC0E5; --route-faint:#4C6D79;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC1; --tbd:#B99BE8;
+  --halo:rgba(11,25,32,.9); --hs-shadow:#020A08; --hs-light:rgba(160,205,190,.22); color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#0B1920; --surface:#11242D; --ink:#E3ECEE; --ink-2:#9AB0B8; --rule:#22404B; --tint:#16303A;
+  --accent:#7BC0E5; --accent-ink:#06202C;
+  --run:#E88F74; --mru:#52C3C4; --transit:#6E838C;
+  --sea:#0A2230; --land:#1B2F28; --coast:#6E9F93; --route:#7BC0E5; --route-faint:#4C6D79;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC1; --tbd:#B99BE8;
+  --halo:rgba(11,25,32,.9); --hs-shadow:#020A08; --hs-light:rgba(160,205,190,.22); color-scheme:dark; }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--nav-h) + 8px)}
+body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.0625rem; line-height:1.55; margin:0; padding-inline:var(--gutter); overflow-x:hidden}
+a{color:var(--accent); text-underline-offset:.18em}
+button{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-wrap:balance; margin:0}
+.wrap{max-width:1240px; margin-inline:auto}
+.mono{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); margin:0}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* Navigation */
+.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; margin-inline:calc(-1 * var(--gutter)); padding-inline:var(--gutter); background:var(--paper); border-bottom:1px solid var(--rule)}
+.nav-in{max-width:1240px; margin-inline:auto; height:var(--nav-h); display:flex; align-items:center; gap:4px}
+.nav-links{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; flex:1; min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav a{display:inline-flex; align-items:center; min-height:44px; padding-inline:7px; color:var(--ink); text-decoration:none; font-size:.9rem; white-space:nowrap; border-radius:4px}
+.nav a:hover{background:var(--tint)}
+.nav-links a .lg{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+/* Lien externe vers le parcours street art : à droite, jamais masqué par le défilement des onglets */
+.nav-links a{padding-inline:5px; font-size:.875rem}
+.nav .nav-ext{flex:none; gap:4px; min-height:38px; padding:3px 8px; border:1.5px solid var(--run); border-radius:999px; color:var(--run); font-weight:700; font-size:.72rem; line-height:1.1}
+.nav .nav-ext:hover{background:var(--run); color:var(--paper)}
+.nav-ext-t{display:flex; flex-direction:column}
+.nav-ext svg{flex:none}
+.nav-links.ovf{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent); mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}
+@media (max-width:380px){ .nav-links a{padding-inline:4px; font-size:.86rem} .nav .nav-ext{font-size:.68rem} .nav-ext svg{display:none} }
+@media (min-width:600px){
+  .nav-links a{padding-inline:7px; font-size:.9rem}
+  .nav-links a .lg{position:static; width:auto; height:auto; overflow:visible; clip:auto} .nav-links a .sm{display:none}
+  .nav .nav-ext{font-size:.85rem; padding:4px 14px; gap:6px}
+  .nav-ext-t{flex-direction:row; gap:.3em}
+}
+.btn-today{justify-self:start; flex:none; min-height:44px; padding:0 16px; border:0; border-radius:999px; background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:.9rem; cursor:pointer}
+
+/* En-tête */
+.hero{padding-block:22px 8px; display:grid; gap:14px}
+.hero h1{font-size:clamp(2.05rem, 8.5vw, 3.5rem); letter-spacing:-.01em}
+.hero h1 em{font-style:italic; font-weight:400; color:var(--ink-2)}
+.hero-sub{margin:0; color:var(--ink-2); font-size:1rem}
+.count{display:inline-flex; align-items:baseline; gap:8px; margin:0; font-size:1rem}
+.count strong{font-family:var(--f-mono); font-size:1.5rem; font-weight:600; color:var(--accent)}
+.facts{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:var(--radius); overflow:hidden; margin:0}
+.facts div{background:var(--surface); padding:10px 12px}
+.facts dt{font-size:.78rem; color:var(--ink-2); margin:0}
+.facts dd{margin:0; font-weight:700; font-size:.98rem; font-variant-numeric:tabular-nums; line-height:1.3}
+
+/* Frise des 17 jours */
+.tl{display:grid; gap:6px}
+.tl-bar{display:grid; grid-template-columns:repeat(17,minmax(0,1fr)); gap:2px}
+.tl-cell{appearance:none; border:0; padding:0; height:40px; border-radius:3px; cursor:pointer; font-family:var(--f-mono); font-size:.68rem; font-weight:600; color:#fff; display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px}
+.tl-cell.isl-reunion{background:var(--run)} .tl-cell.isl-maurice{background:var(--mru)} .tl-cell.isl-transit{background:var(--transit)}
+.tl-cell.isl-both{background:linear-gradient(90deg,var(--mru) 50%,var(--run) 50%)}
+.tl-cell.is-today{box-shadow:0 0 0 2px var(--paper), 0 0 0 4px var(--ink)}
+.tl-cell.is-sel{transform:translateY(-3px)}
+.tl-legend{display:grid; grid-template-columns:repeat(17,minmax(0,1fr)); gap:2px; font-size:.7rem; color:var(--ink-2); line-height:1.2}
+.tl-legend span{border-top:1px solid var(--rule); padding-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.tl-key{display:flex; flex-wrap:wrap; gap:4px 14px; margin:0; padding:0; list-style:none; font-size:.82rem; color:var(--ink-2)}
+.tl-key li{display:inline-flex; align-items:center; gap:6px}
+.tl-key i{width:12px; height:12px; border-radius:2px; display:inline-block}
+
+/* Statuts */
+.legend{display:flex; flex-wrap:wrap; gap:6px 14px; margin:0; padding:0; list-style:none; font-size:.9rem}
+.legend li{display:inline-flex; align-items:center; gap:6px}
+.legend b{font-family:var(--f-mono); font-weight:600}
+.ico{width:12px; height:12px; flex:none; display:inline-block; border-radius:50%}
+[data-s="reserve"] .ico, .ico.reserve{background:var(--ok)}
+[data-s="areserver"] .ico, .ico.areserver{border:2px solid var(--todo)}
+[data-s="optionnel"] .ico, .ico.optionnel{border:2px dashed var(--opt)}
+[data-s="arbitrer"] .ico, .ico.arbitrer{background:var(--tbd); border-radius:2px; transform:rotate(45deg) scale(.82)}
+.st{position:relative; display:inline-flex; align-items:center; gap:7px; min-height:36px; padding:4px 12px 4px 10px; border-radius:999px; font-size:.85rem; font-weight:700; border:1px solid currentColor; background:var(--surface); cursor:pointer; white-space:nowrap}
+.st[data-s="reserve"]{color:var(--ok)} .st[data-s="areserver"]{color:var(--todo)} .st[data-s="optionnel"]{color:var(--opt)} .st[data-s="arbitrer"]{color:var(--tbd)}
+.st select{position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; font-size:16px}
+.st:focus-within{outline:3px solid var(--accent); outline-offset:2px}
+.st-caret{width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; opacity:.7}
+.sync{font-size:.82rem; color:var(--ink-2); margin:0}
+
+/* Programme */
+.section{padding-block:28px 8px}
+.sec-head{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:10px; margin-bottom:14px}
+.sec-head h2{font-size:1.7rem}
+.prog{display:grid; gap:16px; align-items:start}
+.btn-ghost{min-height:44px; padding:0 14px; border:1px solid var(--rule); border-radius:999px; background:var(--surface); cursor:pointer; font-size:.9rem}
+
+/* Carte */
+.map-shell{position:sticky; top:calc(env(safe-area-inset-top,0px) + var(--nav-h)); z-index:20; height:var(--map-h); margin-inline:calc(-1 * var(--gutter)); background:var(--sea); border-bottom:1px solid var(--rule); overflow:hidden}
+#map{position:absolute; inset:0}
+.map-tools{position:absolute; z-index:3; top:8px; left:8px; right:8px; display:flex; flex-wrap:wrap; gap:6px; pointer-events:none}
+.seg{display:inline-flex; background:var(--surface); border:1px solid var(--rule); border-radius:999px; padding:2px; pointer-events:auto; box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg button{min-height:36px; padding:0 11px; border:0; background:transparent; border-radius:999px; font-size:.84rem; cursor:pointer; color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper); font-weight:700}
+.tool-tilt{pointer-events:auto; min-height:40px; padding:0 12px; border:1px solid var(--rule); border-radius:999px; background:var(--surface); font-size:.84rem; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.tool-tilt[aria-pressed="true"]{border-color:var(--ink)}
+.map-note{position:absolute; z-index:2; left:8px; bottom:6px; margin:0; font-size:.7rem; color:var(--ink-2); background:var(--halo); padding:2px 6px; border-radius:3px; max-width:62%}
+.map-msg{position:absolute; inset:0; display:grid; place-items:center; color:var(--ink-2); font-size:.9rem; z-index:1}
+.prog.map-off .map-shell{display:none}
+
+.mk{appearance:none; border:0; background:none; width:34px; height:34px; padding:0; cursor:pointer; display:grid; place-items:center}
+.mk-in{width:26px; height:26px; border:2px solid var(--surface); border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:.72rem; font-weight:600; color:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:opacity .2s, transform .2s}
+.mk.isl-reunion .mk-in{background:var(--run)} .mk.isl-maurice .mk-in{background:var(--mru)}
+.mk-hub .mk-in{border-radius:6px; background:var(--ink); color:var(--paper)}
+.mk-hub svg{width:14px; height:14px; fill:currentColor}
+.mk.is-on{z-index:2}
+.mk.is-on .mk-in{transform:scale(1.25)}
+.mk.is-off .mk-in{opacity:.35}
+.lbl{pointer-events:none; font-size:.72rem; color:var(--ink-2); white-space:nowrap; text-shadow:0 0 3px var(--paper),0 0 3px var(--paper),0 0 2px var(--paper)}
+.lbl-island{font-family:var(--f-display); font-style:italic; font-size:1.05rem; color:var(--ink); letter-spacing:.06em}
+.lbl-ocean{font-family:var(--f-display); font-style:italic; font-size:.95rem; letter-spacing:.3em; color:var(--coast); text-shadow:none}
+.lbl-peak::before{content:""; display:inline-block; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:8px solid var(--ink-2); margin-right:4px; vertical-align:-1px}
+.lbl-cirque{font-family:var(--f-display); font-style:italic; font-size:.82rem; letter-spacing:.08em}
+.map-far .lbl-town,.map-far .lbl-peak,.map-far .lbl-cirque{display:none}
+.map-near .lbl-island,.map-near .lbl-ocean{display:none}
+
+.maplibregl-popup-content{background:var(--surface)!important; color:var(--ink); border-radius:var(--radius)!important; padding:12px 14px!important; font-family:var(--f-body); box-shadow:0 4px 18px rgba(0,0,0,.22)!important; max-width:260px}
+.maplibregl-popup-tip{border-top-color:var(--surface)!important; border-bottom-color:var(--surface)!important}
+.maplibregl-popup-close-button{width:32px; height:32px; font-size:20px; color:var(--ink-2)}
+.pop-t{margin:0 24px 8px 0; font-weight:700; font-size:.95rem; line-height:1.3}
+.pop-day{display:block; width:100%; text-align:left; min-height:40px; padding:6px 8px; margin-top:4px; border:1px solid var(--rule); border-radius:4px; background:var(--paper); font-size:.85rem; cursor:pointer}
+.maplibregl-ctrl-attrib{background:var(--halo)!important; color:var(--ink-2); font-size:10px}
+.maplibregl-ctrl-attrib a{color:var(--ink-2)}
+.maplibregl-ctrl-scale{background:var(--halo)!important; color:var(--ink)!important; border-color:var(--ink-2)!important}
+.maplibregl-ctrl-group{background:var(--surface)!important}
+.maplibregl-ctrl-group button+button{border-top-color:var(--rule)!important}
+
+.svg-map{position:absolute; inset:0; display:flex; gap:8px; padding:52px 10px 26px; align-items:center; justify-content:center}
+.svg-map svg{height:100%; width:auto; max-width:100%; flex:1 1 0; min-width:0}
+
+/* Journées */
+.days{display:grid; gap:14px; min-width:0}
+.day{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); padding:16px 14px 14px; display:grid; gap:12px; scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + var(--map-h) + 12px); min-width:0}
+.prog.map-off .day{scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + 12px)}
+.day.is-sel{border-color:var(--ink); box-shadow:0 0 0 1px var(--ink)}
+.day.is-today{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent)}
+.day-head{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; align-items:start}
+.day-no{grid-row:span 2; font-family:var(--f-display); font-size:2.1rem; line-height:1; font-weight:500; min-width:2.2ch}
+.day-no small{display:block; font-family:var(--f-mono); font-size:.62rem; letter-spacing:.12em; color:var(--ink-2); text-transform:uppercase; margin-bottom:2px}
+.day.isl-reunion .day-no{color:var(--run)} .day.isl-maurice .day-no{color:var(--mru)} .day.isl-both .day-no{color:var(--mru)} .day.isl-transit .day-no{color:var(--transit)}
+.day-date{margin:0; font-size:.9rem; color:var(--ink-2); display:flex; flex-wrap:wrap; gap:4px 10px; align-items:center}
+.day h3{font-size:1.32rem; margin-top:2px}
+.day-place{margin:2px 0 0; font-size:.92rem; color:var(--ink-2)}
+.tag{display:inline-block; font-family:var(--f-mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; padding:2px 7px; border-radius:3px; background:var(--tint); color:var(--ink)}
+.tag-calm{background:transparent; border:1px solid var(--ink-2); color:var(--ink-2)}
+.tag-today{background:var(--accent); color:var(--accent-ink)}
+.btn-map{justify-self:start; display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 14px; border:1px solid var(--rule); border-radius:999px; background:var(--paper); cursor:pointer; font-size:.9rem; font-weight:700}
+.btn-map svg{width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2}
+
+.meta{display:flex; flex-wrap:wrap; gap:6px; margin:0; padding:0; list-style:none}
+.meta li{display:inline-flex; align-items:center; gap:6px; font-size:.82rem; background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:4px 8px; min-width:0}
+.meta .k{color:var(--ink-2)}
+.effort{display:inline-flex; gap:2px}
+.effort i{width:5px; height:12px; border-radius:1px; background:var(--rule)}
+.effort i.on{background:var(--ink)}
+.travel{margin:0; font-size:.88rem; color:var(--ink-2)}
+.travel b{color:var(--ink); font-weight:700}
+
+.acts{list-style:none; margin:0; padding:0; display:grid}
+.act{display:grid; grid-template-columns:3.9rem minmax(0,1fr); gap:2px 10px; padding-block:10px; border-top:1px solid var(--rule)}
+.act:first-child{border-top:0; padding-top:2px}
+.act time{font-family:var(--f-mono); font-size:.84rem; white-space:nowrap; font-weight:500; color:var(--ink-2); padding-top:2px}
+.act-body{min-width:0}
+.act-t{margin:0; font-weight:700; line-height:1.35}
+.act-n{margin:2px 0 0; font-size:.92rem; color:var(--ink-2)}
+.act .st{margin-top:8px}
+.note{margin:0; font-size:.94rem; padding:10px 12px; border-radius:4px; background:var(--paper)}
+.note b{display:block; font-family:var(--f-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin-bottom:2px}
+.note-b{background:transparent; border:1px dashed var(--rule)}
+.src{margin:0; font-size:.8rem; color:var(--ink-2)}
+.src a{color:var(--ink-2)}
+
+/* Réservations */
+.resa{display:grid; gap:16px}
+.resa-group h3{font-family:var(--f-body); font-size:1rem; font-weight:700; display:flex; align-items:center; gap:8px; margin-bottom:6px}
+.resa-group h3 .n{font-family:var(--f-mono); color:var(--ink-2); font-weight:500}
+.resa-list{list-style:none; margin:0; padding:0; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius)}
+.resa-list li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 10px; align-items:center; padding:10px 12px; border-top:1px solid var(--rule)}
+.resa-list li:first-child{border-top:0}
+.resa-day{appearance:none; border:0; background:none; padding:0; text-align:left; cursor:pointer; min-height:44px; display:block; min-width:0}
+.resa-day .d{display:block; font-family:var(--f-mono); font-size:.75rem; color:var(--ink-2)}
+.resa-day .t{display:block; font-weight:700; line-height:1.3; color:var(--ink)}
+.resa-empty{margin:0; padding:10px 12px; color:var(--ink-2); font-size:.9rem; background:var(--surface); border:1px dashed var(--rule); border-radius:var(--radius)}
+
+/* Pratique */
+.prat{display:grid; gap:12px}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); padding:16px 14px; display:grid; gap:8px; min-width:0}
+.card h3{font-size:1.2rem}
+.card p,.card ul{margin:0}
+.card ul{padding-left:1.1em; display:grid; gap:6px}
+.card .src{margin-top:4px}
+.big{font-family:var(--f-mono); font-size:1.35rem; font-weight:600}
+.phones{list-style:none!important; padding:0!important; display:grid; gap:0!important}
+.phones li{display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:8px; padding-block:6px; border-top:1px solid var(--rule)}
+.phones li:first-child{border-top:0}
+.phones .num{font-family:var(--f-mono); font-weight:600; font-size:1.05rem; user-select:all}
+.copy{min-height:36px; min-width:64px; padding:0 10px; border:1px solid var(--rule); border-radius:999px; background:var(--paper); cursor:pointer; font-size:.8rem}
+.sublabel{font-family:var(--f-mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin-top:6px!important}
+
+/* Sources */
+.sources{margin:0; padding-left:1.4em; display:grid; gap:8px; font-size:.88rem}
+.sources span{display:block; color:var(--ink-2); font-size:.8rem}
+footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:var(--ink-2); font-size:.8rem; border-top:1px solid var(--rule); margin-top:28px}
+
+
+/* Vues et vue tableau */
+[hidden]{display:none!important}
+.nav a[aria-current="page"]{font-weight:700; box-shadow:inset 0 -3px 0 var(--accent); border-radius:0}
+.hint{margin:10px 0 10px; font-size:.9rem; color:var(--ink-2)}
+.section-tab{padding-top:16px}
+.tab-wrap{overflow-x:auto; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius)}
+.tab{width:100%; border-collapse:collapse; font-size:.95rem}
+.tab th,.tab td{padding:10px 8px; vertical-align:top; text-align:left}
+.tab thead th{font-family:var(--f-mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); font-weight:500; background:var(--paper); border-bottom:1px solid var(--rule); padding-block:8px}
+.tab .grp th{font-family:var(--f-body); font-size:.84rem; font-weight:700; color:var(--ink); background:var(--tint); border-top:1px solid var(--rule); padding-block:7px; letter-spacing:0; text-transform:none}
+.tab .grp th::before{content:""; display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:8px; vertical-align:-1px; background:var(--transit)}
+.tab .grp-reunion th::before{background:var(--run)} .tab .grp-maurice th::before{background:var(--mru)}
+.tab .row{border-top:1px solid var(--rule); cursor:pointer}
+.tab .grp + .row{border-top:0}
+.tab .row:hover td{background:var(--tint)}
+.c-day{width:3.7rem}
+.c-day .n{display:block; font-family:var(--f-display); font-size:1.55rem; font-weight:500; line-height:1}
+.c-day .d{display:block; margin-top:4px; font-family:var(--f-mono); font-size:.68rem; line-height:1.25; color:var(--ink-2)}
+.row.isl-reunion .n{color:var(--run)} .row.isl-maurice .n,.row.isl-both .n{color:var(--mru)} .row.isl-transit .n{color:var(--transit)}
+.c-prog{min-width:0}
+.c-prog .t{font-weight:700; color:var(--ink); text-decoration:none; line-height:1.3}
+.c-prog .t:hover{text-decoration:underline}
+.c-prog .tag{margin-left:6px; vertical-align:2px}
+.c-prog .pl{display:none; font-size:.85rem; color:var(--ink-2); margin-top:1px}
+.tab-acts{list-style:none; margin:5px 0 0; padding:0; font-size:.86rem; line-height:1.5; color:var(--ink-2)}
+.tab-acts li{display:inline}
+.tab-acts li:not(:last-child)::after{content:" · "; color:var(--ink-2); opacity:.55}
+.tab-acts .ico{width:9px; height:9px; vertical-align:0; margin-right:4px}
+.tab-acts [data-s="areserver"] .ico,.tab-acts [data-s="optionnel"] .ico{border-width:1.5px}
+.c-eff{width:2.2rem; text-align:center}
+.c-eff .effort{display:inline-flex; margin-top:6px}
+.row.is-today td{background:var(--tint)}
+.row.is-today td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+@media (min-width:600px){
+  .tab th,.tab td{padding:12px 12px}
+  .c-day{width:5.6rem}
+  .c-prog .pl{display:block}
+  .c-eff{width:4.2rem}
+}
+
+/* Pour aller + loin */
+.essays{display:grid; gap:14px}
+.essay-card{display:grid; gap:8px; padding:16px 14px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); color:var(--ink); text-decoration:none; min-width:0}
+.essay-card:hover{border-color:var(--ink-2)}
+.essay-card .meta-line{margin:0; font-family:var(--f-mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+.essay-card h3{font-size:1.35rem}
+.essay-card p{margin:0; color:var(--ink-2); font-size:.95rem}
+.essay-card .go{font-weight:700; color:var(--accent); font-size:.92rem}
+.loin-note{margin:16px 0 0; font-size:.9rem; color:var(--ink-2)}
+.essay{max-width:42rem; margin-inline:auto; display:grid; gap:16px}
+.essay-back{justify-self:start; display:inline-flex; align-items:center; text-decoration:none; color:var(--ink)}
+.essay-title{font-size:clamp(1.75rem, 7vw, 2.5rem); margin:6px 0 8px}
+.standfirst{margin:0; font-family:var(--f-display); font-style:italic; font-size:1.15rem; line-height:1.45; color:var(--ink-2)}
+.essay-meta{margin:10px 0 0; font-family:var(--f-mono); font-size:.74rem; color:var(--ink-2)}
+.field{padding:12px 14px 6px; background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius)}
+.field h3{font-family:var(--f-mono); font-size:.7rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin:0 0 4px}
+.field ul{list-style:none; margin:0; padding:0}
+.field li + li{border-top:1px solid var(--rule)}
+.field button{appearance:none; border:0; background:none; width:100%; min-height:48px; padding:8px 0; display:flex; align-items:center; gap:12px; text-align:left; cursor:pointer; color:var(--ink); font-size:.95rem; line-height:1.35}
+.field button small{display:block; font-size:.8rem; color:var(--ink-2)}
+.dn{flex:none; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:.75rem; font-weight:600; color:#fff; background:var(--run)}
+.dn.mru{background:var(--mru)}
+.essay-body{font-family:var(--f-display); font-size:1.13rem; line-height:1.65; min-width:0}
+.essay-body h2{font-size:1.5rem; margin:34px 0 10px}
+.essay-body h3{font-family:var(--f-body); font-size:1.05rem; font-weight:700; margin:24px 0 6px}
+.essay-body p{margin:0 0 14px}
+.essay-body ul,.essay-body ol{margin:0 0 14px; padding-left:1.2em}
+.essay-body li{margin-bottom:6px}
+.essay-body strong{font-weight:600}
+.essay-body blockquote{margin:16px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--surface); font-size:1.03rem}
+.essay-body blockquote p{margin:0}
+.essay-body hr{border:0; border-top:1px solid var(--rule); margin:28px 0}
+.essay-table{overflow-x:auto; margin:16px 0}
+.essay-body table{border-collapse:collapse; width:100%; font-family:var(--f-body); font-size:.9rem; line-height:1.45}
+.essay-body th,.essay-body td{border-bottom:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+.essay-body thead th{background:var(--tint)}
+.essay-body .fine{font-family:var(--f-body); font-size:.86rem; line-height:1.55; color:var(--ink-2); border-top:1px solid var(--rule); padding-top:14px; margin-top:20px}
+.essay-note{margin:0; font-size:.86rem; color:var(--ink-2); font-style:italic}
+@media (min-width:760px){ .essays{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:600px){
+  .facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .act{grid-template-columns:3.9rem minmax(0,1fr) auto; align-items:start}
+  .act .st{margin-top:0; grid-column:3; grid-row:1}
+  .prat{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .day{padding:18px 18px 16px}
+}
+@media (min-width:960px){
+  :root{--gutter:28px}
+  .prog{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:28px}
+  .map-shell{order:2; top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + 16px); height:calc(100vh - var(--nav-h) - 32px); margin-inline:0; border:1px solid var(--rule); border-radius:var(--radius)}
+  .days{order:1}
+  .btn-maptoggle{display:none}
+  .day{scroll-margin-top:calc(var(--nav-h) + 16px)}
+  .prog.map-off .map-shell{display:block}
+  .resa{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prat{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; scroll-behavior:auto!important} }
+/* MapLibre GL 4.7.1 (feuille de style de la bibliothèque) */
+/*__MAPLIBRE_CSS__*/
+</style>
+
+<nav class="nav" aria-label="Pages">
+  <div class="nav-in">
+    <div class="nav-links">
+      <a href="#accueil" data-nav="accueil">Accueil</a>
+      <a href="#jours" data-nav="jours"><span class="lg">Jour par jour</span><span class="sm" aria-hidden="true">Jours</span></a>
+      <a href="#suivi" data-nav="suivi">Suivi</a>
+      <a href="#infos" data-nav="infos">Infos</a>
+      <a href="#loin" data-nav="loin">Plus loin</a>
+    </div>
+    <a class="nav-ext" href="https://street-art-saint-denis.manus.space/" target="_blank" rel="noopener" aria-label="Street Art St Denis : parcours street art de Saint-Denis, site externe, nouvel onglet">
+      <span class="nav-ext-t"><span>Street Art</span> <span>St Denis</span></span>
+      <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><path d="M4.5 2.5h5v5M9.5 2.5 3 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="wrap">
+<main>
+  <div class="view" id="v-accueil">
+    <header class="hero">
+      <p class="eyebrow">Carnet de voyage · océan Indien · UTC+4</p>
+      <h1>La Réunion <em>et</em> Maurice</h1>
+      <p class="hero-sub">Pauline et Sébastien, du mercredi 19 mai au vendredi 4 juin 2027. Accueillis à La Réunion par Lola et Matyise, qui partagent la semaine mauricienne.</p>
+      <p class="count" id="count"><strong id="count-n">—</strong><span id="count-t">jours avant le départ</span></p>
+      <button class="btn-today" id="btn-today" type="button" hidden>Voir la journée en cours</button>
+      <dl class="facts">
+        <div><dt>Durée</dt><dd>17 jours, 15 sur place</dd></div>
+        <div><dt>Maurice</dt><dd>10 jours, 9 nuits</dd></div>
+        <div><dt>Décalage</dt><dd>+2 h sur Toulouse</dd></div>
+        <div><dt>Change</dt><dd>1 € ≈ 53 MUR</dd></div>
+      </dl>
+    </header>
+    <section class="section section-tab" aria-labelledby="h-tab">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Vue d'ensemble</p>
+          <h2 id="h-tab">Le séjour en un coup d'œil</h2>
+        </div>
+      </div>
+      <ul class="legend" id="legend">
+        <li data-s="reserve"><span class="ico"></span>Réservé <b data-count="reserve">0</b></li>
+        <li data-s="areserver"><span class="ico"></span>À réserver <b data-count="areserver">0</b></li>
+        <li data-s="arbitrer"><span class="ico"></span>À arbitrer <b data-count="arbitrer">0</b></li>
+        <li data-s="optionnel"><span class="ico"></span>Optionnel <b data-count="optionnel">0</b></li>
+      </ul>
+      <p class="hint">Touchez une journée pour son détail et sa carte.</p>
+      <div class="tab-wrap"><table class="tab">__TABLE__</table></div>
+    </section>
+  </div>
+
+  <div class="view" id="v-jours" hidden>
+    <section class="section" aria-labelledby="h-prog">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Programme détaillé</p>
+          <h2 id="h-prog">Jour par jour</h2>
+        </div>
+        <button class="btn-ghost btn-maptoggle" id="btn-maptoggle" type="button" aria-expanded="true" aria-controls="map-shell">Masquer la carte</button>
+      </div>
+      <div class="prog" id="prog">
+        <div class="map-shell" id="map-shell">
+          <div id="map" role="region" aria-label="Carte du voyage"></div>
+          <div class="map-msg" id="map-msg">Chargement de la carte…</div>
+          <div class="map-tools">
+            <div class="seg" role="group" aria-label="Vue de la carte">
+              <button type="button" data-view="reunion" aria-pressed="false">La Réunion</button>
+              <button type="button" data-view="maurice" aria-pressed="false">Maurice</button>
+              <button type="button" data-view="both" aria-pressed="true">Les deux</button>
+            </div>
+            <button type="button" class="tool-tilt" id="btn-tilt" aria-pressed="true">Vue 3D</button>
+          </div>
+          <p class="map-note">Relief exagéré ×1,4 · tracés à vol d'oiseau</p>
+        </div>
+        <div class="days" id="days">
+__DAYS__
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="view" id="v-suivi" hidden>
+    <section class="section" aria-labelledby="h-resa">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Suivi</p>
+          <h2 id="h-resa">Réservations et arbitrages</h2>
+        </div>
+      </div>
+      <p class="sync" id="sync">Touchez un statut pour le modifier.</p>
+      <div class="resa" id="resa">__RESA__</div>
+    </section>
+  </div>
+
+  <div class="view" id="v-infos" hidden>
+    <section class="section" aria-labelledby="h-prat">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Avant de partir et sur place</p>
+          <h2 id="h-prat">Informations pratiques</h2>
+        </div>
+      </div>
+      <div class="prat">__PRATIQUE__</div>
+    </section>
+    <section class="section" aria-labelledby="h-src">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Vérifications</p>
+          <h2 id="h-src">Sources</h2>
+        </div>
+      </div>
+      <ol class="sources">__SOURCES__</ol>
+    </section>
+  </div>
+
+  <div class="view" id="v-loin" hidden>
+    <section class="section" aria-labelledby="h-loin">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Dossiers thématiques</p>
+          <h2 id="h-loin">Pour aller + loin</h2>
+        </div>
+      </div>
+      __LOIN__
+    </section>
+  </div>
+</main>
+
+  <footer>
+    <p>Mis à jour le 14 octobre 2026. Horaires et tarifs relevés en ligne aux dates indiquées, à reconfirmer avant chaque réservation. Vols Air France entre Toulouse et Saint-Denis confirmés ; horaires des vols entre les îles relevés en septembre 2026, à vérifier.</p>
+    <p>Carte : trait de côte GSHHG (NOAA, licence LGPL), recalé pour La Réunion ; rendu MapLibre GL. Relief : Copernicus DEM GLO-90, © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l'Union européenne et l'ESA ; tous droits réservés. Aucune adresse de logement n'est indiquée.</p>
+  </footer>
+</div>
+
+<script type="application/json" id="trip-data">__TRIP_JSON__</script>
+<script type="application/json" id="geo-data">__GEO_JSON__</script>
+<script>
+__APP_JS__
+</script>

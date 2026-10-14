@@ -1,0 +1,412 @@
+{
+"run": {
+"isl": "reunion",
+"lon": 55.5103,
+"lat": -20.8871,
+"name": "Aéroport Roland-Garros",
+"coast": true
+},
+"barachois": {
+"isl": "reunion",
+"lon": 55.4485,
+"lat": -20.8775,
+"name": "Le Barachois, Saint-Denis",
+"coast": true
+},
+"stdenis": {
+"isl": "reunion",
+"lon": 55.4505,
+"lat": -20.8815,
+"name": "Saint-Denis, rue de Paris et Grand Marché"
+},
+"tunnel": {
+"isl": "reunion",
+"lon": 55.797,
+"lat": -21.257,
+"name": "Tunnels de lave, Grand Brûlé (RN2)"
+},
+"vanille": {
+"isl": "reunion",
+"lon": 55.792,
+"lat": -21.312,
+"name": "Vanille, Le Tremblet (Saint-Philippe)"
+},
+"capmechant": {
+"isl": "reunion",
+"lon": 55.713,
+"lat": -21.375,
+"name": "Cap Méchant",
+"coast": true
+},
+"anse": {
+"isl": "reunion",
+"lon": 55.8311,
+"lat": -21.186,
+"name": "Anse des Cascades",
+"coast": true
+},
+"helico": {
+"isl": "reunion",
+"lon": 55.425,
+"lat": -21.321,
+"name": "Héliport de Pierrefonds, Saint-Pierre"
+},
+"saintleu": {
+"isl": "reunion",
+"lon": 55.2845,
+"lat": -21.168,
+"name": "Saint-Leu, atterrissage parapente",
+"coast": true
+},
+"colimacons": {
+"isl": "reunion",
+"lon": 55.306,
+"lat": -21.136,
+"name": "Décollage des Colimaçons (800 m)"
+},
+"kelonia": {
+"isl": "reunion",
+"lon": 55.2825,
+"lat": -21.152,
+"name": "Kélonia",
+"coast": true
+},
+"salazie": {
+"isl": "reunion",
+"lon": 55.54,
+"lat": -21.027,
+"name": "Salazie"
+},
+"voile": {
+"isl": "reunion",
+"lon": 55.531,
+"lat": -21.045,
+"name": "Voile de la Mariée"
+},
+"hellbourg": {
+"isl": "reunion",
+"lon": 55.52,
+"lat": -21.065,
+"name": "Hell-Bourg"
+},
+"mru": {
+"isl": "maurice",
+"lon": 57.6836,
+"lat": -20.4302,
+"name": "Aéroport Sir Seewoosagur Ramgoolam"
+},
+"mahebourg": {
+"isl": "maurice",
+"lon": 57.7,
+"lat": -20.4081,
+"name": "Mahébourg",
+"coast": true
+},
+"bluebay": {
+"isl": "maurice",
+"lon": 57.7144,
+"lat": -20.4447,
+"name": "Blue Bay, parc marin",
+"coast": true
+},
+"baseouest": {
+"isl": "maurice",
+"lon": 57.37,
+"lat": -20.315,
+"name": "Base ouest (Flic-en-Flac, Tamarin ou La Gaulette)",
+"coast": true
+},
+"morne": {
+"isl": "maurice",
+"lon": 57.32,
+"lat": -20.452,
+"name": "Le Morne Brabant, sentier"
+},
+"routeesclave": {
+"isl": "maurice",
+"lon": 57.3226,
+"lat": -20.4617,
+"name": "Monument de la Route de l'Esclave",
+"coast": true
+},
+"sept": {
+"isl": "maurice",
+"lon": 57.3733,
+"lat": -20.4404,
+"name": "Terre des Sept Couleurs, Chamarel"
+},
+"cascade": {
+"isl": "maurice",
+"lon": 57.3839,
+"lat": -20.4344,
+"name": "Cascade de Chamarel"
+},
+"rhumerie": {
+"isl": "maurice",
+"lon": 57.392,
+"lat": -20.4265,
+"name": "Rhumerie de Chamarel"
+},
+"petrin": {
+"isl": "maurice",
+"lon": 57.473,
+"lat": -20.4085,
+"name": "Gorges de Rivière Noire, Pétrin"
+},
+"gorges": {
+"isl": "maurice",
+"lon": 57.444,
+"lat": -20.411,
+"name": "Point de vue des Gorges"
+},
+"grandbassin": {
+"isl": "maurice",
+"lon": 57.4919,
+"lat": -20.4183,
+"name": "Grand Bassin (Ganga Talao)"
+},
+"riviere": {
+"isl": "maurice",
+"lon": 57.3655,
+"lat": -20.364,
+"name": "Rivière Noire, embarquement",
+"coast": true
+},
+"benitiers": {
+"isl": "maurice",
+"lon": 57.3433,
+"lat": -20.4194,
+"name": "Île aux Bénitiers",
+"sea": true
+},
+"boischeri": {
+"isl": "maurice",
+"lon": 57.524,
+"lat": -20.4265,
+"name": "Bois Chéri"
+},
+"staubin": {
+"isl": "maurice",
+"lon": 57.545,
+"lat": -20.493,
+"name": "Domaine de Saint-Aubin"
+},
+"rochester": {
+"isl": "maurice",
+"lon": 57.5054,
+"lat": -20.4985,
+"name": "Rochester Falls"
+},
+"grisgris": {
+"isl": "maurice",
+"lon": 57.531,
+"lat": -20.524,
+"name": "Gris-Gris",
+"coast": true
+},
+"aapravasi": {
+"isl": "maurice",
+"lon": 57.5034,
+"lat": -20.1588,
+"name": "Aapravasi Ghat, Port-Louis",
+"coast": true
+},
+"marche": {
+"isl": "maurice",
+"lon": 57.5052,
+"lat": -20.1612,
+"name": "Marché central, Port-Louis"
+},
+"caudan": {
+"isl": "maurice",
+"lon": 57.4985,
+"lat": -20.162,
+"name": "Caudan Waterfront",
+"coast": true
+},
+"basenord": {
+"isl": "maurice",
+"lon": 57.58,
+"lat": -20.013,
+"name": "Base nord (Grand Baie, Pereybère ou Trou aux Biches)",
+"coast": true
+},
+"pamplemousses": {
+"isl": "maurice",
+"lon": 57.58,
+"lat": -20.1035,
+"name": "Jardin de Pamplemousses"
+},
+"capmalheureux": {
+"isl": "maurice",
+"lon": 57.614,
+"lat": -19.984,
+"name": "Cap Malheureux",
+"coast": true
+},
+"grandbaie": {
+"isl": "maurice",
+"lon": 57.58,
+"lat": -20.013,
+"name": "Grand Baie",
+"coast": true
+},
+"bainboeuf": {
+"isl": "maurice",
+"lon": 57.603,
+"lat": -19.988,
+"name": "Bain Bœuf, embarquement",
+"coast": true
+},
+"coindemire": {
+"isl": "maurice",
+"lon": 57.627,
+"lat": -19.944,
+"name": "Coin de Mire",
+"sea": true
+},
+"ileplate": {
+"isl": "maurice",
+"lon": 57.653,
+"lat": -19.88,
+"name": "Île Plate",
+"sea": true
+},
+"gabriel": {
+"isl": "maurice",
+"lon": 57.656,
+"lat": -19.892,
+"name": "Îlot Gabriel",
+"sea": true
+},
+"troubiches": {
+"isl": "maurice",
+"lon": 57.5374,
+"lat": -20.0263,
+"name": "Trou aux Biches",
+"coast": true
+},
+"pereybere": {
+"isl": "maurice",
+"lon": 57.5828,
+"lat": -19.9918,
+"name": "Pereybère",
+"coast": true
+},
+"labourdonnais": {
+"isl": "maurice",
+"lon": 57.63,
+"lat": -20.074,
+"name": "Château de Labourdonnais"
+},
+"cerfs": {
+"isl": "maurice",
+"lon": 57.804,
+"lat": -20.271,
+"name": "Île aux Cerfs",
+"sea": true
+},
+"troudeau": {
+"isl": "maurice",
+"lon": 57.788,
+"lat": -20.241,
+"name": "Trou d'Eau Douce",
+"coast": true
+},
+"tamarinfalls": {
+"isl": "maurice",
+"lon": 57.456,
+"lat": -20.3445,
+"name": "Chutes de Tamarin, départ d'Henrietta"
+},
+"ebony": {
+"isl": "maurice",
+"lon": 57.395,
+"lat": -20.418,
+"name": "Ebony Forest, Chamarel"
+},
+"eureka": {
+"isl": "maurice",
+"lon": 57.498,
+"lat": -20.2187,
+"name": "Maison Eurêka, Moka"
+},
+"sucre": {
+"isl": "maurice",
+"lon": 57.5865,
+"lat": -20.1125,
+"name": "L'Aventure du Sucre, Beau Plan"
+},
+"bellemare": {
+"isl": "maurice",
+"lon": 57.7669,
+"lat": -20.1981,
+"name": "Plage de Belle Mare"
+},
+"palmar": {
+"isl": "maurice",
+"lon": 57.7853,
+"lat": -20.22,
+"name": "Plage de Palmar"
+},
+"riviereest": {
+"isl": "reunion",
+"lon": 55.8135,
+"lat": -21.1585,
+"name": "Pont suspendu de la Rivière de l'Est"
+},
+"epices": {
+"isl": "reunion",
+"lon": 55.74,
+"lat": -21.362,
+"name": "Jardin des Parfums et des Épices"
+},
+"langevin": {
+"isl": "reunion",
+"lon": 55.64,
+"lat": -21.33,
+"name": "Cascade de Grand Galet, Langevin"
+},
+"mascarin": {
+"isl": "reunion",
+"lon": 55.3085,
+"lat": -21.1325,
+"name": "Conservatoire botanique de Mascarin"
+},
+"gouffre": {
+"isl": "reunion",
+"lon": 55.358,
+"lat": -21.2823,
+"name": "Gouffre de l'Étang-Salé"
+},
+"skywalk": {
+"isl": "reunion",
+"lon": 55.475,
+"lat": -21.272,
+"name": "Pont du Bras de la Plaine, Skywalk"
+},
+"boiscourt": {
+"isl": "reunion",
+"lon": 55.5435,
+"lat": -21.2055,
+"name": "Belvédère de Bois-Court, plateforme de verre"
+},
+"colosse": {
+"isl": "reunion",
+"lon": 55.681,
+"lat": -20.948,
+"name": "Temple du Colosse, Saint-André"
+},
+"mare": {
+"isl": "reunion",
+"lon": 55.538,
+"lat": -21.053,
+"name": "Mare à Poule d'Eau, Salazie"
+},
+"jardinetat": {
+"isl": "reunion",
+"lon": 55.4475,
+"lat": -20.8865,
+"name": "Jardin de l'État, Saint-Denis"
+}
+}
