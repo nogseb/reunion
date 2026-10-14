@@ -21,7 +21,7 @@ TAB = {
     7: [("Thé à Bois Chéri", None), ("Rhum et vanille à Saint-Aubin", "j7-staubin"), ("Rochester Falls et Gris-Gris", "j7-sud")],
     8: [("Maison Eurêka", "j8-eureka"), ("Aapravasi Ghat", "j8-aapravasi"), ("Marché central", None), ("Caudan", None),
         ("Installation côte nord", "j8-basenord")],
-    9: [("Île aux Cerfs", "j9-cerfs"), ("Plages de Belle Mare et Palmar", None)],
+    9: [("Île aux Cerfs en navette lente", None), ("Kayak en bonus, si mer calme", "j9-kayak"), ("Plages de Belle Mare et Palmar", None)],
     10: [("Îlots du nord en catamaran", "j10-ilots"), ("Coin de Mire, île Plate, îlot Gabriel", None), ("Pereybère", None)],
     11: [("Pamplemousses", None), ("L'Aventure du Sucre", None), ("La Table du Château", "j11-table"),
          ("Château de Labourdonnais", "j11-labourdonnais"), ("Dîner à Grand Baie", None)],
