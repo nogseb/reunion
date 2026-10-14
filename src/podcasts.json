@@ -22,5 +22,21 @@
  "engagisme": {
   "secs": 404,
   "bytes": 3229363
+ },
+ "religions": {
+  "secs": 357,
+  "bytes": 2853399
+ },
+ "canne-vanille": {
+  "secs": 339,
+  "bytes": 2710458
+ },
+ "paul-virginie": {
+  "secs": 287,
+  "bytes": 2298569
+ },
+ "fournaise": {
+  "secs": 322,
+  "bytes": 2575462
  }
 }

@@ -272,7 +272,7 @@ def quiz_block(slug):
     items = []
     for i, x in enumerate(qs):
         opts = [x["r"]] + x["f"]
-        random.Random(f"{slug}-{i}-50").shuffle(opts)  # graine choisie pour répartir les bonnes réponses entre A, B, C et D
+        random.Random(f"{slug}-{i}-13").shuffle(opts)  # graine choisie pour répartir les bonnes réponses entre A, B, C et D
         ok = opts.index(x["r"])
         btns = "".join(f'<button type="button" class="qz-o" data-i="{k}"><span class="qz-l" aria-hidden="true">{LETTERS[k]}</span><span>{t(o)}</span></button>' for k, o in enumerate(opts))
         items.append(f'<li class="qz" data-ok="{ok}"><p class="qz-q" id="qz-{slug}-{i}">{t(x["q"])}</p>'

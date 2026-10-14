@@ -51,6 +51,44 @@ ARTICLES = [
         note=None,
     ),
     dict(
+        slug="paul-virginie",
+        file="../contenus/Paul_et_Virginie.md",
+        theme="Littérature",
+        dest="Maurice",
+        links=[
+            ("j8", "Statue de Paul et Virginie au Blue Penny Museum, Caudan"),
+            ("j10", "Île d'Ambre, récif du naufrage, et stèle de Poudre d'Or"),
+            ("j11", "Pamplemousses, le vallon du roman"),
+        ],
+        note=None,
+    ),
+    dict(
+        slug="religions",
+        file="../contenus/Religions_et_vivre_ensemble.md",
+        theme="Société",
+        dest="Maurice et La Réunion",
+        links=[
+            ("j5", "Grand Bassin, le lac sacré de l'hindouisme mauricien"),
+            ("j12", "Messe à Cap Malheureux"),
+            ("j15", "Temple du Colosse, à Saint-André"),
+            ("j16", "Lieux de culte du centre de Saint-Denis"),
+        ],
+        note=None,
+    ),
+    dict(
+        slug="canne-vanille",
+        file="../contenus/Canne_rhum_the_et_vanille.md",
+        theme="Terroir",
+        dest="Maurice et La Réunion",
+        links=[
+            ("j4", "Rhumerie de Chamarel"),
+            ("j7", "Bois Chéri et Domaine de Saint-Aubin"),
+            ("j11", "L'Aventure du Sucre et Labourdonnais"),
+            ("j13", "Atelier vanille au Tremblet"),
+        ],
+        note=None,
+    ),
+    dict(
         slug="genese",
         file="../contenus/La_Reunion_De_la_genese_a_nos_jours.md",
         theme="Histoire et nature",
@@ -74,5 +112,15 @@ ARTICLES = [
             ("j15", "Le temple du Colosse, premier lieu de culte des engagés"),
         ],
         note="Rédigé d'après les panneaux d'exposition photographiés lors du séjour de juillet 2026.",
+    ),
+    dict(
+        slug="fournaise",
+        file="../contenus/Sous_la_Fournaise.md",
+        theme="Nature",
+        dest="La Réunion",
+        links=[
+            ("j13", "Tunnel de la coulée de 2004 et route des Laves"),
+        ],
+        note=None,
     ),
 ]
