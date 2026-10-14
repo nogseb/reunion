@@ -26,7 +26,7 @@ TAB = {
     11: [("Pamplemousses", None), ("L'Aventure du Sucre", None), ("La Table du Château", "j11-table"),
          ("Château de Labourdonnais", "j11-labourdonnais"), ("Dîner à Grand Baie", None)],
     12: [("Messe à Cap Malheureux", "j12-messe"), ("Trou aux Biches", None), ("Vol vers La Réunion", "j12-vol")],
-    13: [("Pont de la Rivière de l'Est", None), ("Tunnels de lave", "j13-tunnel"), ("Vanille au Tremblet", "j13-vanille"),
+    13: [("Pont de la Rivière de l'Est", None), ("Tunnel de lave 2004, visite découverte", "j13-tunnel"), ("Vanille au Tremblet", "j13-vanille"),
          ("Cap Méchant", None), ("Jardin des Parfums et des Épices", "j13-epices"), ("Cascade de Grand Galet", None)],
     14: [("Parapente", "j14-parapente"), ("Jardin de Mascarin", None), ("Gouffre de l'Étang-Salé", None),
          ("Plateforme de verre de Bois-Court", None), ("Skywalk", "j14-skywalk")],

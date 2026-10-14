@@ -2,7 +2,7 @@
   "run": {"isl": "reunion", "lon": 55.5103, "lat": -20.8871, "name": "Aéroport Roland-Garros", "coast": true},
   "barachois": {"isl": "reunion", "lon": 55.4485, "lat": -20.8775, "name": "Le Barachois, Saint-Denis", "coast": true},
   "stdenis": {"isl": "reunion", "lon": 55.4505, "lat": -20.8815, "name": "Saint-Denis, rue de Paris et Grand Marché"},
-  "tunnel": {"isl": "reunion", "lon": 55.808, "lat": -21.255, "name": "Tunnels de lave, Grand Brûlé (RN2)"},
+  "tunnel": {"isl": "reunion", "lon": 55.80702, "lat": -21.22015, "name": "Tunnel de lave de la coulée 2004, rendez-vous Envergure"},
   "vanille": {"isl": "reunion", "lon": 55.792, "lat": -21.312, "name": "Vanille, Le Tremblet (Saint-Philippe)"},
   "capmechant": {"isl": "reunion", "lon": 55.713, "lat": -21.375, "name": "Cap Méchant", "coast": true},
   "anse": {"isl": "reunion", "lon": 55.822, "lat": -21.178, "name": "Anse des Cascades", "coast": true},

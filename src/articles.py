@@ -8,7 +8,7 @@ ARTICLES = [
         theme="Histoire et nature",
         dest="La Réunion",
         links=[
-            ("j13", "Tunnels de lave du Grand Brûlé et vanille de Saint-Philippe"),
+            ("j13", "Tunnel de lave de la coulée 2004 et vanille de Saint-Philippe"),
             ("j14", "Bois-Court, au-dessus des gorges du Bras de la Plaine"),
             ("j15", "Le cirque de Salazie et Hell-Bourg"),
         ],
