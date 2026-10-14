@@ -305,13 +305,25 @@ html = (tpl.replace("/*__MAPLIBRE_CSS__*/", css)
         .replace("__TRIP_JSON__", safe_json(trip))
         .replace("__GEO_JSON__", safe_json(geo_out))
         .replace("__APP_JS__", app))
-open("reunion-maurice-2027.html", "w").write(html)  # fragment publié comme artefact Claude
+# Site de voyage privé : accessible par lien, mais pas dans les moteurs de recherche.
+# noindex : pas d'indexation ; nofollow : liens non suivis ; noarchive / nosnippet : ni cache ni extrait ;
+# noimageindex : images de la page non indexées. Doublé côté serveur par docs/.htaccess (en-tête X-Robots-Tag).
+ROBOTS = '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">'
 
-# Version autonome pour GitHub Pages (dossier docs/) : squelette HTML complet autour du même contenu.
+# Fragment publié comme artefact Claude (le squelette HTML est ajouté à la publication).
+open("reunion-maurice-2027.html", "w").write(ROBOTS + "\n" + html)
+
+# Version autonome (dossier docs/, pour GitHub Pages ou un hébergement web) : document HTML complet,
+# avec titre, balise robots, polices et styles dans <head>.
 # Hors artefact, les statuts sont enregistrés dans le navigateur (localStorage) et ne sont pas partagés.
-SKELETON = ('<!doctype html><html lang="fr"><head><meta charset="utf-8">'
-            '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-            '<meta name="robots" content="noindex,nofollow">'
-            '<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>')
-open("../docs/index.html", "w").write(SKELETON + html + "</body></html>")
+cut = html.index("</style>") + len("</style>")
+head_part, body_part = html[:cut], html[cut:]
+assert head_part.lstrip().startswith("<title>") and "<nav" not in head_part
+doc = ('<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
+       '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+       + ROBOTS + '\n<meta name="referrer" content="strict-origin-when-cross-origin">\n'
+       + head_part
+       + '\n<style>img{max-width:100%}[hidden]{display:none!important}</style>\n</head>\n<body>'
+       + body_part + '\n</body>\n</html>\n')
+open("../docs/index.html", "w").write(doc)
 print("OK", round(len(html.encode()) / 1024), "Ko,", len(acts_json), "statuts,", len(places), "lieux")

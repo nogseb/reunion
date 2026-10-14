@@ -1,0 +1,6 @@
+# Site de voyage privé : accessible par lien, exclu des moteurs de recherche.
+# Pris en compte par les hébergements Apache (OVHcloud mutualisé, par exemple) ; ignoré par GitHub Pages.
+# L'en-tête couvre aussi les fichiers sans balise <meta>, comme les tuiles de relief (terrain/*.png).
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+</IfModule>

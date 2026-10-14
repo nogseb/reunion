@@ -68,8 +68,24 @@ Dans la version GitHub Pages, elle reste dans le navigateur de la personne qui l
 ## Confidentialité
 
 La page contient des prénoms, des numéros de vol et les dates d'absence du domicile. Aucune adresse de logement n'y figure (commune uniquement).
-Recommandation : garder ce dépôt **privé**. Dans ce cas, GitHub Pages demande un abonnement payant ; l'artefact Claude reste la version à consulter.
-La page autonome demande aux moteurs de recherche de ne pas l'indexer (`noindex`), ce qui ne la protège pas pour autant.
+
+Le site est conçu pour circuler **par lien partagé**, pas pour être trouvé sur un moteur de recherche :
+
+| Mesure | Où | Effet |
+|---|---|---|
+| `<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">` | `<head>` de `docs/index.html`, en tête du fragment artefact | pas d'indexation, ni cache, ni extrait, ni images indexées |
+| En-tête HTTP `X-Robots-Tag` (mêmes valeurs) | `docs/.htaccess` | couvre aussi les tuiles PNG ; actif sur un hébergement Apache (OVHcloud mutualisé), ignoré par GitHub Pages |
+| Aucun sitemap, aucun lien vers le site depuis ce dépôt | — | le site n'est pas signalé aux moteurs |
+
+Points d'attention :
+
+- Ne pas bloquer le site dans un `robots.txt` (`Disallow`) : un robot qui ne peut pas lire la page ne voit pas la consigne `noindex`, et l'adresse peut alors apparaître dans les résultats sans description.
+- `noindex` est une consigne respectée par les grands moteurs (Google, Bing), pas une protection : toute personne qui a le lien peut ouvrir la page.
+- Ces balises ne s'appliquent qu'au site. **Le dépôt GitHub lui-même, s'il est public, reste indexable** (README, `src/content.py`, etc.). Seul un dépôt privé l'évite ; GitHub Pages demande alors un abonnement payant.
+
+### Héberger sur un domaine personnel (Apache, OVHcloud)
+
+Copier le **contenu** du dossier `docs/` (y compris `.htaccess`, fichier caché) dans le sous-dossier choisi, par exemple `/rm/`, via FTP ou le gestionnaire de fichiers.
 
 ## Crédits et licences
 
