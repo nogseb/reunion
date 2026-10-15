@@ -6,13 +6,13 @@
 /* Carnet de bord mobile d'abord : une colonne, carte collée sous la barre de navigation ;
    au-delà de 960 px, journal à gauche et carte fixe à droite. */
 :root{
-  --paper:#F0F4F3; --surface:#FFFFFF; --ink:#11232B; --ink-2:#4B636E; --rule:#D0DBDC; --tint:#E3ECEC;
-  --accent:#125C8A; --accent-ink:#FFFFFF;
-  --run:#A3432D; --mru:#0D7880; --transit:#7D9099;
-  --sea:#D3E6EA; --land:#E9EEE2; --coast:#5C7C75; --route:#125C8A; --route-faint:#7F9BA6;
-  --ok:#2C784C; --todo:#A2560F; --opt:#5A6A7D; --tbd:#7044AC;
-  --halo:rgba(240,244,243,.92);
-  --hs-shadow:#3F5A52; --hs-light:rgba(255,255,255,.6);
+  --paper:#F6F3EC; --surface:#FFFFFF; --ink:#1A2629; --ink-2:#53636A; --rule:#DCD6C9; --tint:#EDE8DD;
+  --accent:#006B78; --accent-ink:#FFFFFF;
+  --run:#B03F27; --mru:#007A76; --transit:#8A9499; --run-tint:#F6E2DA; --mru-tint:#D9EFEC;
+  --sea:#BFE5E2; --land:#EFE9D8; --coast:#5E8F86; --route:#0B4F5C; --route-faint:#7E9EA0;
+  --ok:#2E7D4F; --todo:#A85410; --opt:#5E6B7A; --tbd:#7A4BB0;
+  --halo:rgba(246,243,236,.92);
+  --hs-shadow:#3D5650; --hs-light:rgba(255,255,255,.6);
   --f-display:"Spectral", Georgia, "Times New Roman", serif;
   --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -20,19 +20,19 @@
 }
 @supports (height:1svh){ :root{ --map-h:clamp(220px, 38svh, 380px); } }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0B1920; --surface:#11242D; --ink:#E3ECEE; --ink-2:#9AB0B8; --rule:#22404B; --tint:#16303A;
-  --accent:#7BC0E5; --accent-ink:#06202C;
-  --run:#E88F74; --mru:#52C3C4; --transit:#6E838C;
-  --sea:#0A2230; --land:#1B2F28; --coast:#6E9F93; --route:#7BC0E5; --route-faint:#4C6D79;
-  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC1; --tbd:#B99BE8;
-  --halo:rgba(11,25,32,.9); --hs-shadow:#020A08; --hs-light:rgba(160,205,190,.22); color-scheme:dark; } }
+  --paper:#0E1719; --surface:#152226; --ink:#E8EDEA; --ink-2:#A3B2B2; --rule:#2A3A3D; --tint:#1B2C30;
+  --accent:#6CCFD0; --accent-ink:#062027;
+  --run:#EC8F72; --mru:#4FC7BC; --transit:#76858A; --run-tint:#2E1D18; --mru-tint:#0F2B2A;
+  --sea:#0A2628; --land:#1E2A24; --coast:#6F9A8C; --route:#6CCFD0; --route-faint:#4D6C72;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#A0AEBC; --tbd:#BC9DE8;
+  --halo:rgba(14,23,25,.9); --hs-shadow:#020807; --hs-light:rgba(170,210,200,.2); color-scheme:dark; } }
 :root[data-theme="dark"]{
-  --paper:#0B1920; --surface:#11242D; --ink:#E3ECEE; --ink-2:#9AB0B8; --rule:#22404B; --tint:#16303A;
-  --accent:#7BC0E5; --accent-ink:#06202C;
-  --run:#E88F74; --mru:#52C3C4; --transit:#6E838C;
-  --sea:#0A2230; --land:#1B2F28; --coast:#6E9F93; --route:#7BC0E5; --route-faint:#4C6D79;
-  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC1; --tbd:#B99BE8;
-  --halo:rgba(11,25,32,.9); --hs-shadow:#020A08; --hs-light:rgba(160,205,190,.22); color-scheme:dark; }
+  --paper:#0E1719; --surface:#152226; --ink:#E8EDEA; --ink-2:#A3B2B2; --rule:#2A3A3D; --tint:#1B2C30;
+  --accent:#6CCFD0; --accent-ink:#062027;
+  --run:#EC8F72; --mru:#4FC7BC; --transit:#76858A; --run-tint:#2E1D18; --mru-tint:#0F2B2A;
+  --sea:#0A2628; --land:#1E2A24; --coast:#6F9A8C; --route:#6CCFD0; --route-faint:#4D6C72;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#A0AEBC; --tbd:#BC9DE8;
+  --halo:rgba(14,23,25,.9); --hs-shadow:#020807; --hs-light:rgba(170,210,200,.2); color-scheme:dark; }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--nav-h) + 8px)}
@@ -48,6 +48,8 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 
 /* Navigation */
 .nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; margin-inline:calc(-1 * var(--gutter)); padding-inline:var(--gutter); background:var(--paper); border-bottom:1px solid var(--rule)}
+/* Filet bicolore Réunion / Maurice en haut de page */
+.nav::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--run) 0 50%,var(--mru) 50% 100%)}
 .nav-in{max-width:1240px; margin-inline:auto; height:var(--nav-h); display:flex; align-items:center; gap:4px}
 .nav-links{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; flex:1; min-width:0}
 .nav-links::-webkit-scrollbar{display:none}
@@ -274,6 +276,7 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
 .tab .grp th{font-family:var(--f-body); font-size:.84rem; font-weight:700; color:var(--ink); background:var(--tint); border-top:1px solid var(--rule); padding-block:7px; letter-spacing:0; text-transform:none}
 .tab .grp th::before{content:""; display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:8px; vertical-align:-1px; background:var(--transit)}
 .tab .grp-reunion th::before{background:var(--run)} .tab .grp-maurice th::before{background:var(--mru)}
+.tab .grp-reunion th{background:var(--run-tint)} .tab .grp-maurice th{background:var(--mru-tint)}
 .tab .row{border-top:1px solid var(--rule); cursor:pointer}
 .tab .grp + .row{border-top:0}
 .tab .row:hover td{background:var(--tint)}
