@@ -238,6 +238,8 @@
       if (a.dataset.nav === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     page = name;
+    var fx = document.getElementById('fx');
+    if (fx) fx.setAttribute('data-page', name);
     if (name === 'jours') ensureMap();
     var cur = $('.nav-links [aria-current]');
     if (cur && cur.scrollIntoView && navOvf()) cur.scrollIntoView({ block: 'nearest', inline: 'nearest' });

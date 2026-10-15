@@ -29,6 +29,7 @@ src/                   sources et générateur
   site.py              assemble la page
   geo_build.py         traits de côte, lignes d'eau, lever et coucher du soleil
   terrain_build.py     tuiles de relief depuis Copernicus DEM
+  relief_fx.py         courbes de niveau du fond animé (accueil), depuis docs/terrain/10
   *.json               données géographiques et lieux
   vendor/              feuille de style MapLibre GL 4.7.1
 contenus/              articles en Markdown
@@ -54,6 +55,7 @@ Pour ajouter un dossier, déposer le Markdown dans `contenus/` et le déclarer d
    - `Copernicus_DSM_COG_30_S20_00_E057_00_DEM.tif` et `Copernicus_DSM_COG_30_S21_00_E057_00_DEM.tif` (Maurice)
    - source : `https://copernicus-dem-90m.s3.amazonaws.com/<nom sans .tif>/<nom>.tif`
 2. `python3 terrain_build.py` (écrit `docs/terrain/` et `src/terrain_index.json`), puis `python3 site.py`.
+3. Pour le fond animé « Relief des deux îles » : `pip install scikit-image`, puis `python3 relief_fx.py` (écrit `src/relief_fx.json`) et `python3 site.py`.
 
 ### Régénérer les traits de côte
 

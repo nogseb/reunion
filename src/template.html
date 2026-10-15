@@ -387,11 +387,46 @@ footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); color:va
   .resa{grid-template-columns:repeat(2,minmax(0,1fr))}
   .prat{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+/* Fond animé « Relief des deux îles » : courbes de niveau réelles (Copernicus DEM), Maurice au nord-est,
+   La Réunion au sud-ouest, cadrées autour de la colonne de contenu ; tracé à l'ouverture puis lumière lente vers les sommets. */
+#fx{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; contain:strict; transition:opacity .6s ease}
+#fx:not([data-page="accueil"]){opacity:.45}
+.fx-isl{position:absolute; width:var(--w); will-change:transform}
+.fx-isl .fx-l{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.fx-isl path{fill:none; vector-effect:non-scaling-stroke; stroke-linejoin:round; stroke-dasharray:1; stroke-dashoffset:1; animation:fx-draw 3.2s ease-out .2s forwards}
+.fx-maurice path{stroke:var(--mru)} .fx-reunion path{stroke:var(--run)}
+.fx-coast{opacity:.36} .fx-coast path{stroke-width:1.4}
+.fx-low path, .fx-high path{stroke-width:.8}
+.fx-low{opacity:.16; animation:fx-breathe 11s ease-in-out 3.4s infinite}
+.fx-high{opacity:.16; animation:fx-breathe 11s ease-in-out 5.2s infinite}
+/* Téléphone : Maurice en haut à droite du titre, La Réunion à gauche sous l'introduction, entières à l'écran */
+.fx-maurice{--w:min(42vw, 25vh); right:var(--gutter); top:calc(var(--nav-h) + 2.5vh); animation:fx-drift 41s ease-in-out -12s infinite alternate}
+.fx-reunion{--w:min(74vw, 44vh); left:var(--gutter); bottom:7vh; animation:fx-drift 34s ease-in-out infinite alternate}
+@media (min-width:600px){
+  .fx-maurice{--w:min(30vw, 30vh, 260px); right:8%; top:calc(var(--nav-h) + 3vh)}
+  .fx-reunion{--w:min(46vw, 40vh, 400px); left:6%; bottom:auto; top:38vh}
+}
+/* Écran large : chaque île encadre la colonne de contenu (1240 px), à 32 px de son bord quand la marge le permet,
+   sinon au bord de l'écran ; toujours entière. --m : largeur d'une marge latérale. */
+@media (min-width:960px){
+  #fx{--m:calc((100vw - 1240px) / 2)}
+  .fx-maurice{--w:min(20vw, 34vh, 280px, max(180px, calc(var(--m) - 40px))); top:calc(var(--nav-h) + 6vh);
+    right:max(var(--gutter), calc(var(--m) - var(--w) - 32px))}
+  .fx-reunion{--w:min(32vw, 48vh, 440px, max(250px, calc(var(--m) - 40px))); top:auto; bottom:7vh;
+    left:max(var(--gutter), calc(var(--m) - var(--w) - 32px))}
+}
+@media (min-width:960px) and (max-width:1719px){ .fx-reunion{bottom:auto; top:44vh} }
+@keyframes fx-draw{to{stroke-dashoffset:0}}
+@keyframes fx-breathe{0%,100%{opacity:.16} 45%{opacity:.46}}
+@keyframes fx-drift{from{transform:translate3d(0,0,0) rotate(0)} to{transform:translate3d(-6px,-10px,0) rotate(.6deg)}}
+@media (prefers-reduced-motion: reduce){ #fx *{animation:none!important} .fx-isl path{stroke-dashoffset:0} .fx-low, .fx-high{opacity:.24} }
+@media print{ #fx{display:none} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important; scroll-behavior:auto!important} }
 /* MapLibre GL 4.7.1 (feuille de style de la bibliothèque) */
 /*__MAPLIBRE_CSS__*/
 </style>
 
+__FX__
 <nav class="nav" aria-label="Pages">
   <div class="nav-in">
     <div class="nav-links">

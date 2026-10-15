@@ -347,6 +347,17 @@ trip = dict(
 geo_out = dict(islands={k: dict(land=v["land"], waterlines=v["waterlines"], bounds=v["bounds"]) for k, v in GEO["islands"].items()}, svg=GEO["svg"])
 geo_out["terrain"] = json.load(open("terrain_index.json"))
 
+# Animation de fond « Relief des deux îles » : courbes de niveau réelles (voir relief_fx.py)
+FX = json.load(open("relief_fx.json"))
+def fx_island(k):
+    i = FX[k]
+    vb = f'0 0 {i["w"]} {i["h"]}'
+    return (f'<div class="fx-isl fx-{k}" style="aspect-ratio:{i["w"]}/{i["h"]}">'
+            + "".join(f'<svg class="fx-l fx-{c}" viewBox="{vb}" preserveAspectRatio="xMidYMid meet"><path d="{i[c]}" pathLength="1"/></svg>'
+                      for c in ("coast", "low", "high")) + '</div>')
+fx_html = ('<div id="fx" aria-hidden="true" data-page="accueil">'
+           + fx_island("maurice") + fx_island("reunion") + '</div>')
+
 css = open("vendor/maplibre-gl.css").read()
 app = open("app.js").read()
 tpl = open("template.html").read()
@@ -366,6 +377,7 @@ html = (tpl.replace("/*__MAPLIBRE_CSS__*/", css)
         .replace("__SOURCES__", "".join(srcs))
         .replace("__TRIP_JSON__", safe_json(trip))
         .replace("__GEO_JSON__", safe_json(geo_out))
+        .replace("__FX__", fx_html)
         .replace("__APP_JS__", app))
 # Site de voyage privé : accessible par lien, mais pas dans les moteurs de recherche.
 # noindex : pas d'indexation ; nofollow : liens non suivis ; noarchive / nosnippet : ni cache ni extrait ;
