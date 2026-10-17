@@ -415,5 +415,47 @@
 "lat": -20.0392,
 "name": "Île d'Ambre",
 "sea": true
+},
+"lagaulette": {
+"isl": "maurice",
+"lon": 57.3533,
+"lat": -20.4204,
+"name": "La Gaulette, départ du kayak",
+"coast": true
+},
+"plagemorne": {
+"isl": "maurice",
+"lon": 57.315,
+"lat": -20.461,
+"name": "Plage publique du Morne",
+"coast": true
+},
+"flicenflac": {
+"isl": "maurice",
+"lon": 57.3607,
+"lat": -20.2732,
+"name": "Flic-en-Flac",
+"coast": true
+},
+"rochequipleure": {
+"isl": "maurice",
+"lon": 57.5366,
+"lat": -20.5239,
+"name": "La Roche qui pleure",
+"coast": true
+},
+"prairie": {
+"isl": "maurice",
+"lon": 57.3576,
+"lat": -20.488,
+"name": "Prairie Beach",
+"coast": true
+},
+"montchoisy": {
+"isl": "maurice",
+"lon": 57.5428,
+"lat": -20.0218,
+"name": "Plage de Mont-Choisy",
+"coast": true
 }
 }

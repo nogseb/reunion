@@ -82,7 +82,7 @@ ARTICLES = [
         dest="Maurice et La Réunion",
         links=[
             ("j4", "Rhumerie de Chamarel"),
-            ("j7", "Bois Chéri et Domaine de Saint-Aubin"),
+            ("j7", "Domaine de Saint-Aubin"),
             ("j11", "L'Aventure du Sucre et Labourdonnais"),
             ("j13", "Atelier vanille au Tremblet"),
         ],

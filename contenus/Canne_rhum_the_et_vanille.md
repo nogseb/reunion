@@ -36,9 +36,9 @@ Sur les étiquettes, deux familles de rhum se partagent les rayons.
 
 ## 3. Le thé de Bois Chéri, l'héritage britannique
 
-Le thé arrive à Maurice au XIXe siècle, introduit par les colons britanniques pour ne pas tout miser sur le sucre [6]. Sur les hauteurs du sud, **Bois Chéri**, plantée en **1892**, est la plus ancienne plantation de thé de l'île [6]. Vous la visiterez le matin du jour 7, quand l'usine tourne.
+Le thé arrive à Maurice au XIXe siècle, introduit par les colons britanniques pour ne pas tout miser sur le sucre [6]. Sur les hauteurs du sud, **Bois Chéri**, plantée en **1892**, est la plus ancienne plantation de thé de l'île [6]. Le jour 7, la route vers Saint-Aubin longe ses plantations.
 
-En environ 24 heures, la feuille passe par toutes les étapes : flétrissage, roulage, fermentation, séchage, tri, aromatisation, conditionnement [6]. Un petit musée présente les machines d'époque, et la visite se termine par une dégustation dans un chalet qui domine un lac. La spécialité de la maison est un **thé noir à la vanille** [6].
+En environ 24 heures, la feuille passe par toutes les étapes : flétrissage, roulage, fermentation, séchage, tri, aromatisation, conditionnement [6]. Un petit musée présente les machines d'époque, et la visite se termine par une dégustation dans un chalet qui domine un lac. Des amis l'ont trouvée décevante : nous ne nous y arrêtons pas. La spécialité de la maison est un **thé noir à la vanille** [6].
 
 Bois Chéri est la première étape de la **Route du thé**, avec le Domaine des Aubineaux, une maison coloniale de 1872, et le Domaine de Saint-Aubin [6].
 
@@ -72,7 +72,7 @@ Le nom de **vanille Bourbon** vient de l'ancien nom de La Réunion, l'île Bourb
 | Jour | Lieu | À goûter |
 |---|---|---|
 | Jour 4 | Rhumerie de Chamarel | Rhum agricole |
-| Jour 7 | Bois Chéri | Thés, dont le thé à la vanille |
+| Jour 7 | Plantations de Bois Chéri, sur la route | Paysages de thé |
 | Jour 7 | Domaine de Saint-Aubin | Rhum agricole, vanille |
 | Jour 11 | L'Aventure du Sucre | Dégustations comprises dans la visite |
 | Jour 11 | Château de Labourdonnais | Rhums |
