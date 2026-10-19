@@ -5,6 +5,7 @@ from content import DAYS, SOURCES, LABELS, LOGEMENTS, LG_ST, LG_ORDER, LG_GROUPS
 from tab import TAB, GROUPS
 from articles import ARTICLES
 from quiz import QUIZ
+import voiture as V
 import random
 import markdown
 
@@ -191,6 +192,33 @@ for g, glabel, gnote in LG_GROUPS:
     lg_html.append(f'<div class="resa-group lg-group"><h3>{t(glabel)} <span class="n">{len([x for x in items if x["s"] != "ecartee"])}</span></h3>'
                    f'<p class="lg-gn">{t(gnote)}</p><ul class="resa-list lg-list">{"".join(lis)}</ul></div>')
 logements_html = "".join(lg_html)
+
+# ---------- Location de voiture (page Suivi) ----------
+def voiture_html():
+    t0 = t
+    def t(x):  # « ≈ » toujours collé à son montant
+        return t0(x).replace("≈ ", "≈\u00a0")
+    hyp = "".join(f"<li>{t(x)}</li>" for x in V.HYPOTHESES)
+    chif = "".join(f"<div><dt>{t(a)}</dt><dd>{t(b)}</dd></div>" for a, b in V.CHIFFRES)
+    offres = "".join(
+        f'<li class="car-item{" car-reco" if reco else ""}"><p class="car-h"><b>{t(l)}</b><span>{t(ty)}</span></p>'
+        f'<p class="car-v">{t(veh)}</p>'
+        f'<p class="car-p mono">{t(j)} par jour · {t(tot)} les 10 jours · {t(pp)} par personne</p>'
+        f'<p class="car-n">{t(n)}</p></li>'
+        for l, ty, veh, j, tot, pp, n, reco in V.OFFRES)
+    ass = "".join(f"<li>{t(x)}</li>" for x in V.ASSURANCE)
+    chk = "".join(f"<li>{t(x)}</li>" for x in V.A_CONFIRMER)
+    src = "".join(f'<li><a href="{u}" target="_blank" rel="noopener">{e(ti)}</a></li>' for ti, u in V.SOURCES)
+    return (f'<dl class="facts car-facts">{chif}</dl>'
+            f'<h3 class="car-sh">Hypothèses</h3><ul class="car-ul">{hyp}</ul>'
+            f'<h3 class="car-sh">Comparatif, 10 jours facturés</h3>'
+            f'<p class="car-legend">Tarifs « à partir de » publiés en 2026, convertis en euros ; ce ne sont pas des devis pour mai 2027. Les offres recommandées sont signalées par un filet vert.</p>'
+            f'<ul class="resa-list car-list">{offres}</ul>'
+            f'<p class="note"><b>Recommandation</b>{t(V.RECO)}</p>'
+            f'<h3 class="car-sh">Assurance et caution</h3><ul class="car-ul">{ass}</ul>'
+            f'<h3 class="car-sh">À faire confirmer par écrit avant de réserver</h3><ul class="car-ul car-check">{chk}</ul>'
+            f'<p class="note note-b"><b>Lien avec les billets d\'avion</b>{t(V.VOLS)}</p>'
+            f'<h3 class="car-sh">Sources, relevées le {V.RELEVE}</h3><ol class="sources car-src">{src}</ol>')
 
 # ---------- Vue tableau ----------
 act_s = {a["id"]: a["s"] for a in acts_json}
@@ -388,6 +416,7 @@ html = (tpl.replace("/*__MAPLIBRE_CSS__*/", css)
         .replace("__DAYS__", "\n".join(days_html))
         .replace("__RESA__", "".join(resa))
         .replace("__LOGEMENTS__", logements_html)
+        .replace("__VOITURE__", voiture_html())
         .replace("__PRATIQUE__", "".join(prat))
         .replace("__SOURCES__", "".join(srcs))
         .replace("__TRIP_JSON__", safe_json(trip))

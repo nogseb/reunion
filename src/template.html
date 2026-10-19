@@ -217,12 +217,12 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 .resa-day .d{display:block; font-family:var(--f-mono); font-size:.75rem; color:var(--ink-2)}
 .resa-day .t{display:block; font-weight:700; line-height:1.3; color:var(--ink)}
 /* Onglets de la page Suivi */
-.tabs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; margin-top:20px; padding:3px; background:var(--surface); border:1px solid var(--rule); border-radius:14px}
+.tabs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; margin-top:20px; padding:3px; background:var(--surface); border:1px solid var(--rule); border-radius:14px}
 .tabs button{min-height:44px; padding:6px 10px; border:0; border-radius:11px; background:transparent; color:var(--ink); font-size:.9rem; line-height:1.2; cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--ink); color:var(--paper); font-weight:700}
 .tabs button:not([aria-selected="true"]):hover{background:var(--tint)}
 .tab-panel.section{padding-top:16px}
-@media (min-width:600px){ .tabs{display:inline-grid; grid-template-columns:auto auto; border-radius:999px} .tabs button{border-radius:999px; padding:0 16px} }
+@media (min-width:600px){ .tabs{display:inline-grid; grid-template-columns:auto auto auto; border-radius:999px} .tabs button{border-radius:999px; padding:0 16px} }
 /* Demandes de logement */
 [data-s="envoyee"] .ico{border:2px solid var(--todo)}
 [data-s="acceptee"] .ico{background:var(--ok)}
@@ -242,6 +242,21 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 .lg-item[data-s="acceptee"]{box-shadow:inset 3px 0 0 var(--ok)}
 @media (max-width:420px){ .lg-list > li{grid-template-columns:minmax(0,1fr)} .lg-list .st{justify-self:start} }
 .lg-item{scroll-margin-top:calc(var(--nav-h) + 12px)}
+/* Onglet Location de voiture */
+.car-facts{margin:4px 0 6px}
+.car-sh{font-family:var(--f-body); font-size:1rem; font-weight:700; margin:22px 0 8px}
+.car-ul{margin:0; padding-left:1.1rem; display:grid; gap:6px; font-size:.95rem}
+.car-legend{margin:0 0 8px; color:var(--ink-2); font-size:.88rem}
+.car-list > li{grid-template-columns:minmax(0,1fr); gap:2px}
+.car-h{margin:0; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px}
+.car-h span{font-family:var(--f-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+.car-v{margin:0; font-size:.95rem}
+.car-p{margin:2px 0 0; font-size:.8rem; color:var(--ink)}
+.car-n{margin:2px 0 0; font-size:.88rem; color:var(--ink-2)}
+.car-reco{box-shadow:inset 3px 0 0 var(--ok)}
+.car-list + .note{margin-top:14px}
+.car-src{margin-top:0}
+.car-check + .note{margin-top:16px}
 .act-l{display:inline-flex; align-items:center; min-height:32px; font-size:.9rem; margin-top:2px}
 /* Galerie d'une maison : bandeau de vignettes défilant, visionneuse plein écran */
 .gal{margin-top:10px; min-width:0}
@@ -536,6 +551,7 @@ __DAYS__
     <div class="tabs" role="tablist" aria-label="Suivi">
       <button type="button" role="tab" id="tab-resa" data-tab="resa" aria-controls="p-resa" aria-selected="true">Réservations et arbitrages</button>
       <button type="button" role="tab" id="tab-lg" data-tab="lg" aria-controls="p-lg" aria-selected="false" tabindex="-1">Demandes de logement</button>
+      <button type="button" role="tab" id="tab-car" data-tab="car" aria-controls="p-car" aria-selected="false" tabindex="-1">Location de voiture</button>
     </div>
     <section class="section tab-panel" id="p-resa" role="tabpanel" aria-labelledby="tab-resa">
       <div class="sec-head">
@@ -554,8 +570,18 @@ __DAYS__
           <h2 id="h-lg">Demandes de logement</h2>
         </div>
       </div>
-      <p class="sync">Demandes envoyées le 14 octobre 2026. Les dates de la maison 2 dépendent de la maison 1 retenue. Touchez un statut pour le mettre à jour.</p>
+      <p class="sync">Maison 1 confirmée chez Ayesha, à La Gaulette. Demandes en cours pour la maison 2, du 27 au 30 mai. Touchez un statut pour le mettre à jour.</p>
       <div class="resa lg">__LOGEMENTS__</div>
+    </section>
+    <section class="section tab-panel" id="p-car" role="tabpanel" aria-labelledby="tab-car" hidden>
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Maurice · aéroport, 21 au 30 mai</p>
+          <h2 id="h-car">Location de voiture</h2>
+        </div>
+      </div>
+      <p class="sync">Comparatif des loueurs pour quatre adultes, prise et retour à l'aéroport.</p>
+      __VOITURE__
     </section>
   </div>
 

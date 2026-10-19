@@ -324,6 +324,7 @@
       return;
     }
     if (h === 'logements' || h === 'demandes') { showPage('suivi'); selectTab('lg'); window.scrollTo(0, 0); return; }
+    if (h === 'voiture' || h === 'location') { showPage('suivi'); selectTab('car'); window.scrollTo(0, 0); return; }
     if (/^lg-[a-z0-9-]+$/.test(h) && document.getElementById(h)) {
       showPage('suivi'); selectTab('lg');
       var card = document.getElementById(h);

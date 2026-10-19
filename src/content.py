@@ -90,7 +90,7 @@ DAYS = [
          acts=[
              dict(t="08:30", txt="Enregistrement à l'aéroport Roland-Garros"),
              dict(t="10:10", txt="Vol Saint-Denis → Maurice, arrivée à 10 h 55", note="Air Austral UU104. Horaire relevé sur juin, à vérifier pour le 21 mai.", s="areserver", id="j3-vol"),
-             dict(t="11:30", txt="Prise de la voiture de location", note="Quatre adultes et leurs bagages : une catégorie au-dessus de la citadine.", s="areserver", id="j3-voiture"),
+             dict(t="11:30", txt="Prise de la voiture de location", note="Quatre adultes et leurs bagages : une catégorie au-dessus de la citadine.", s="areserver", id="j3-voiture", link=("#voiture", "Voir le comparatif des loueurs")),
              dict(t="12:00", txt="Biscuiterie Rault, à Mahébourg", note="Fabrication des biscuits de manioc et dégustation. Horaires à vérifier sur place.", s="optionnel", id="j3-rault"),
              dict(t="12:45", txt="Déjeuner sur le front de mer de Mahébourg"),
              dict(t="14:00", txt="Bateau à fond de verre et snorkeling à Blue Bay", note="Parc marin, environ 1 h, dès 24 € par personne, masque et tuba fournis.", s="optionnel", id="j3-bluebay"),
