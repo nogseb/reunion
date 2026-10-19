@@ -194,30 +194,31 @@ for g, glabel, gnote in LG_GROUPS:
 logements_html = "".join(lg_html)
 
 # ---------- Location de voiture (page Suivi) ----------
+def tn(x):
+    """Texte typographié, « ≈ » toujours collé à son montant."""
+    return t(x).replace("≈ ", "≈\u00a0")
+
 def voiture_html():
-    t0 = t
-    def t(x):  # « ≈ » toujours collé à son montant
-        return t0(x).replace("≈ ", "≈\u00a0")
-    hyp = "".join(f"<li>{t(x)}</li>" for x in V.HYPOTHESES)
-    chif = "".join(f"<div><dt>{t(a)}</dt><dd>{t(b)}</dd></div>" for a, b in V.CHIFFRES)
+    hyp = "".join(f"<li>{tn(x)}</li>" for x in V.HYPOTHESES)
+    chif = "".join(f"<div><dt>{tn(a)}</dt><dd>{tn(b)}</dd></div>" for a, b in V.CHIFFRES)
     offres = "".join(
-        f'<li class="car-item{" car-reco" if reco else ""}"><p class="car-h"><b>{t(l)}</b><span>{t(ty)}</span></p>'
-        f'<p class="car-v">{t(veh)}</p>'
-        f'<p class="car-p mono">{t(j)} par jour · {t(tot)} les 10 jours · {t(pp)} par personne</p>'
-        f'<p class="car-n">{t(n)}</p></li>'
+        f'<li class="car-item{" car-reco" if reco else ""}"><p class="car-h"><b>{tn(l)}</b><span>{tn(ty)}</span></p>'
+        f'<p class="car-v">{tn(veh)}</p>'
+        f'<p class="car-p mono">{tn(j)} par jour · {tn(tot)} les 10 jours · {tn(pp)} par personne</p>'
+        f'<p class="car-n">{tn(n)}</p></li>'
         for l, ty, veh, j, tot, pp, n, reco in V.OFFRES)
-    ass = "".join(f"<li>{t(x)}</li>" for x in V.ASSURANCE)
-    chk = "".join(f"<li>{t(x)}</li>" for x in V.A_CONFIRMER)
+    ass = "".join(f"<li>{tn(x)}</li>" for x in V.ASSURANCE)
+    chk = "".join(f"<li>{tn(x)}</li>" for x in V.A_CONFIRMER)
     src = "".join(f'<li><a href="{u}" target="_blank" rel="noopener">{e(ti)}</a></li>' for ti, u in V.SOURCES)
     return (f'<dl class="facts car-facts">{chif}</dl>'
             f'<h3 class="car-sh">Hypothèses</h3><ul class="car-ul">{hyp}</ul>'
             f'<h3 class="car-sh">Comparatif, 10 jours facturés</h3>'
             f'<p class="car-legend">Tarifs « à partir de » publiés en 2026, convertis en euros ; ce ne sont pas des devis pour mai 2027. Les offres recommandées sont signalées par un filet vert.</p>'
             f'<ul class="resa-list car-list">{offres}</ul>'
-            f'<p class="note"><b>Recommandation</b>{t(V.RECO)}</p>'
+            f'<p class="note"><b>Recommandation</b>{tn(V.RECO)}</p>'
             f'<h3 class="car-sh">Assurance et caution</h3><ul class="car-ul">{ass}</ul>'
             f'<h3 class="car-sh">À faire confirmer par écrit avant de réserver</h3><ul class="car-ul car-check">{chk}</ul>'
-            f'<p class="note note-b"><b>Lien avec les billets d\'avion</b>{t(V.VOLS)}</p>'
+            f'<p class="note note-b"><b>Lien avec les billets d\'avion</b>{tn(V.VOLS)}</p>'
             f'<h3 class="car-sh">Sources, relevées le {V.RELEVE}</h3><ol class="sources car-src">{src}</ol>')
 
 # ---------- Vue tableau ----------
