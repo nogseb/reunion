@@ -7,7 +7,7 @@ RELEVE = "19 octobre 2026"
 
 HYPOTHESES = [
     "Prise à l'aéroport le vendredi 21 mai vers 11 h 30, retour le dimanche 30 mai vers 16 h 30 : 9 jours et 5 heures, donc 10 jours facturés chez presque tous les loueurs.",
-    "Quatre adultes avec des sacs souples, les grosses valises restant à La Réunion : une berline ou un SUV compact suffit, de préférence automatique pour la conduite à gauche. Les minis (i10, Picanto) sont trop justes.",
+    "Quatre adultes avec des sacs souples, les grosses valises restant à La Réunion : une berline ou un SUV compact suffit. Les minis (i10, Picanto) sont trop justes.",
     "Mai est un mois creux : DiscoverCars l'affiche autour de 27 $ par jour pour une économique.",
 ]
 
@@ -30,11 +30,11 @@ OFFRES = [
      "Très grand coffre. Conditions non publiées.", False),
     ("RosCar", "Local", "Suzuki Ertiga, 7 places", "49 $ (≈ 44 €)", "≈ 435 €", "≈ 109 €",
      "Assurance en option, prépaiement demandé.", False),
-    ("First Choice", "Local, via comparateur", "Suzuki Dzire, berline manuelle", "≈ 24 €", "≈ 240 €", "≈ 60 €",
-     "Le moins cher, mais boîte manuelle et assurance de base.", False),
+    ("First Choice", "Local, via comparateur", "Suzuki Dzire, berline", "≈ 24 €", "≈ 240 €", "≈ 60 €",
+     "Le moins cher, avec une assurance de base.", False),
     ("DiscoverCars", "Comparateur", "SUV, prix d'appel", "≈ 55 €", "≈ 550 €", "≈ 138 €",
      "Moyenne du marché, tous loueurs confondus.", False),
-    ("Sixt, aéroport", "International", "Suzuki Ertiga automatique, 7 places", "≈ 98 €", "≈ 980 €", "≈ 245 €",
+    ("Sixt, aéroport", "International", "Suzuki Ertiga, 7 places", "≈ 98 €", "≈ 980 €", "≈ 245 €",
      "Comptoir à l'aéroport, procédures standard.", False),
 ]
 
@@ -45,14 +45,13 @@ ASSURANCE = [
 ]
 
 RECO = ("Un loueur local qui inclut l'assurance tous risques et le second conducteur, avec remise des clés à l'aéroport, "
-        "en berline ou SUV compact automatique. Maki est le mieux documenté ; Liberta est l'alternative pour le break Corolla et son grand coffre.")
+        "en berline ou SUV compact. Maki est le mieux documenté ; Liberta est l'alternative pour le break Corolla et son grand coffre.")
 
 A_CONFIRMER = [
     "Montant de la franchise et exclusions (pneus, vitres, dessous de caisse)",
     "Montant de la caution et type de carte accepté",
     "Remise des clés à l'aéroport et son éventuel coût",
     "Second conducteur inclus",
-    "Boîte automatique garantie",
     "Carburant : plein rendu plein",
     "Tolérance sur l'heure de retour",
 ]
