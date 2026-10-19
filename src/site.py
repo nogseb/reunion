@@ -104,6 +104,8 @@ for d in DAYS:
         if a.get("s"):
             stc = st_control(a["id"], a["s"], a["txt"])
             acts_json.append(dict(id=a["id"], day=did, txt=a["txt"], s=a["s"]))
+        if a.get("link"):
+            note += f'<a class="act-l" href="{a["link"][0]}">{t(a["link"][1])}</a>'
         acts.append(f'<li class="act">{tm}<div class="act-body"><p class="act-t">{t(a["txt"])}</p>{note}</div>{stc}</li>')
     tip = f'<p class="note"><b>Conseil pratique</b>{t(d["tip"])}</p>' if d.get("tip") else ""
     planb = f'<p class="note note-b"><b>Si la météo est défavorable</b>{t(d["planb"])}</p>' if d.get("planb") else ""
@@ -157,6 +159,19 @@ def lg_control(lid, s, label):
             f'<span class="st-txt">{LG_ST[s]}</span><span class="st-caret" aria-hidden="true"></span>'
             f'<select aria-label="Demande : {e(label)}">{opts}</select></label>')
 
+def gallery(x):
+    """Bandeau de vignettes ; chaque vignette ouvre la photo (visionneuse en JS, lien simple sinon)."""
+    if not x.get("photos"):
+        return ""
+    items = json.load(open(x["photos"]))
+    d = x["photos_dir"]
+    lis = "".join(
+        f'<li><a href="{d}{ph["f"]}" data-i="{i}" data-cap="{e(ph["cap"])}" data-w="{ph["w"]}" data-h="{ph["h"]}">'
+        f'<img src="{d}t/{ph["f"]}" alt="{e(ph["cap"])}" width="{ph["tw"] // 2}" height="{ph["th"] // 2}" loading="lazy" decoding="async"></a></li>'
+        for i, ph in enumerate(items))
+    return (f'<div class="gal" data-gal="{x["id"]}"><p class="gal-h">Photos de la maison <span class="mono">{len(items)}</span></p>'
+            f'<ul class="gal-strip" aria-label="Photos de la maison, {e(x["lieu"])}">{lis}</ul></div>')
+
 lg_html = []
 for g, glabel, gnote in LG_GROUPS:
     items = [x for x in LOGEMENTS if x["g"] == g]
@@ -168,10 +183,10 @@ for g, glabel, gnote in LG_GROUPS:
         else:
             dates = "Sans demande"
         lis.append(
-            f'<li class="lg-item" data-lg-item="{x["id"]}" data-s="{x["s"]}">'
+            f'<li class="lg-item" id="{x["id"]}" data-lg-item="{x["id"]}" data-s="{x["s"]}">'
             f'<div class="lg-body"><p class="lg-h"><b>{t(x["hote"])}</b><span>{t(x["lieu"])}</span></p>'
             f'<p class="lg-d mono">{dates}</p><p class="lg-n">{t(x["note"])}</p>'
-            f'<a class="lg-a" href="{x["url"]}" target="_blank" rel="noopener noreferrer">Voir l\'annonce HomeExchange</a></div>'
+            f'<a class="lg-a" href="{x["url"]}" target="_blank" rel="noopener noreferrer">Voir l\'annonce HomeExchange</a>{gallery(x)}</div>'
             f'{lg_control(x["id"], x["s"], x["hote"] + ", " + x["lieu"])}</li>')
     lg_html.append(f'<div class="resa-group lg-group"><h3>{t(glabel)} <span class="n">{len([x for x in items if x["s"] != "ecartee"])}</span></h3>'
                    f'<p class="lg-gn">{t(gnote)}</p><ul class="resa-list lg-list">{"".join(lis)}</ul></div>')

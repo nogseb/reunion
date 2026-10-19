@@ -97,6 +97,60 @@
     return p;
   }
 
+  /* ---------------- Galerie photo d'une maison : visionneuse plein écran ---------------- */
+  (function () {
+    var lb, img, cap, cnt, list = [], idx = 0, x0 = null;
+    var ICON = function (d) { return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+    function build() {
+      lb = document.createElement('dialog');
+      lb.className = 'lb';
+      lb.setAttribute('aria-label', 'Photos de la maison');
+      lb.innerHTML = '<div class="lb-in"><div class="lb-top"><span class="lb-cnt mono" aria-live="polite"></span>' +
+        '<button type="button" class="lb-x" aria-label="Fermer">' + ICON('M6 6l12 12M18 6L6 18') + '</button></div>' +
+        '<figure class="lb-fig"><img alt="">' +
+        '<button type="button" class="lb-nav lb-prev" aria-label="Photo précédente">' + ICON('M15 5l-7 7 7 7') + '</button>' +
+        '<button type="button" class="lb-nav lb-next" aria-label="Photo suivante">' + ICON('M9 5l7 7-7 7') + '</button></figure>' +
+        '<p class="lb-cap"></p></div>';
+      document.body.appendChild(lb);
+      img = lb.querySelector('img'); cap = lb.querySelector('.lb-cap'); cnt = lb.querySelector('.lb-cnt');
+      lb.querySelector('.lb-x').addEventListener('click', function () { lb.close(); });
+      lb.querySelector('.lb-prev').addEventListener('click', function () { show(idx - 1); });
+      lb.querySelector('.lb-next').addEventListener('click', function () { show(idx + 1); });
+      lb.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+      });
+      var fig = lb.querySelector('.lb-fig');
+      fig.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      fig.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0; x0 = null;
+        if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+      lb.addEventListener('close', function () { document.documentElement.style.overflow = ''; });
+    }
+    function show(i) {
+      idx = (i + list.length) % list.length;
+      var it = list[idx];
+      img.src = it.href; img.alt = it.cap;
+      cap.textContent = it.cap;
+      cnt.textContent = (idx + 1) + ' / ' + list.length;
+      [idx + 1, idx - 1].forEach(function (j) { var n = list[(j + list.length) % list.length]; if (n) { var p = new Image(); p.src = n.href; } });
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('.gal-strip a');
+      if (!a || typeof HTMLDialogElement === 'undefined') return;
+      e.preventDefault();
+      var g = a.closest('.gal');
+      list = Array.prototype.map.call(g.querySelectorAll('.gal-strip a'), function (x) { return { href: x.getAttribute('href'), cap: x.dataset.cap }; });
+      if (!lb) build();
+      document.documentElement.style.overflow = 'hidden';
+      lb.showModal();
+      show(+a.dataset.i);
+      lb.querySelector('.lb-next').focus();
+    });
+  })();
+
   /* ---------------- Demandes de logement (HomeExchange) ---------------- */
   var LGST = TRIP.lgst || {};
   var lgById = {};
@@ -270,6 +324,12 @@
       return;
     }
     if (h === 'logements' || h === 'demandes') { showPage('suivi'); selectTab('lg'); window.scrollTo(0, 0); return; }
+    if (/^lg-[a-z0-9-]+$/.test(h) && document.getElementById(h)) {
+      showPage('suivi'); selectTab('lg');
+      var card = document.getElementById(h);
+      setTimeout(function () { card.scrollIntoView({ block: 'start' }); }, 0);
+      return;
+    }
     h = ALIAS[h] || h;
     if (PAGES.indexOf(h) < 0) h = 'accueil';
     if (h === 'loin') { showPage('loin'); openEssay(null); window.scrollTo(0, 0); return; }

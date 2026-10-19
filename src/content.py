@@ -94,7 +94,7 @@ DAYS = [
              dict(t="12:00", txt="Biscuiterie Rault, à Mahébourg", note="Fabrication des biscuits de manioc et dégustation. Horaires à vérifier sur place.", s="optionnel", id="j3-rault"),
              dict(t="12:45", txt="Déjeuner sur le front de mer de Mahébourg"),
              dict(t="14:00", txt="Bateau à fond de verre et snorkeling à Blue Bay", note="Parc marin, environ 1 h, dès 24 € par personne, masque et tuba fournis.", s="optionnel", id="j3-bluebay"),
-             dict(t="16:00", txt="Route vers La Gaulette et installation chez Ayesha", note="Échange HomeExchange confirmé : 6 nuits, du 21 au 27 mai, arrivée vers 17 h. Ménage 62 € et taxe MRA 72 € à régler en espèces à l'arrivée ; eau à économiser.", s="reserve", id="j3-baseouest"),
+             dict(t="16:00", txt="Route vers La Gaulette et installation chez Ayesha", note="Échange HomeExchange confirmé : 6 nuits, du 21 au 27 mai, arrivée vers 17 h. Ménage 62 € et taxe MRA 72 € à régler en espèces à l'arrivée ; eau à économiser.", s="reserve", id="j3-baseouest", link=("#lg-ayesha", "Voir les photos de la maison")),
          ],
          tip="Premiers kilomètres à gauche : évitez Port-Louis aujourd'hui. Peu de restaurants à La Gaulette, mais un supermarché : faites les courses en route.",
          planb="Mer agitée à Blue Bay : visite guidée de la vallée de Ferney à 13 h 30, forêt primaire, environ 2 h, 1 150 MUR, sur réservation.",
@@ -343,7 +343,7 @@ LG_GROUPS = [
 ]
 LOGEMENTS = [
     dict(id="lg-ayesha", g=1, hote="Ayesha", lieu="La Gaulette", debut="2027-05-21", fin="2027-05-27", s="acceptee",
-         url="https://www.homeexchange.fr/homes/view/2915027",
+         url="https://www.homeexchange.fr/homes/view/2915027", photos="photos_ayesha.json", photos_dir="logements/ayesha/",
          note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). En espèces à l'arrivée : ménage 62 € et taxe MRA 72 €. Deux lits king size ; eau à économiser. Clés, stationnement et kayaks : questions posées à Ayesha."),
     dict(id="lg-kamaya", g=1, hote="Alice et Alex", lieu="Chamarel (Villa Kamaya)", debut="2027-05-21", fin="2027-05-26", s="ecartee",
          url="https://www.homeexchange.fr/homes/view/3182390",

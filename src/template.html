@@ -241,6 +241,31 @@ h1,h2,h3{font-family:var(--f-display); font-weight:600; line-height:1.15; text-w
 .lg-item[data-s="refusee"] .lg-body, .lg-item[data-s="ecartee"] .lg-body{opacity:.6}
 .lg-item[data-s="acceptee"]{box-shadow:inset 3px 0 0 var(--ok)}
 @media (max-width:420px){ .lg-list li{grid-template-columns:minmax(0,1fr)} .lg-list .st{justify-self:start} }
+.lg-item{scroll-margin-top:calc(var(--nav-h) + 12px)}
+.act-l{display:inline-flex; align-items:center; min-height:32px; font-size:.9rem; margin-top:2px}
+/* Galerie d'une maison : bandeau de vignettes défilant, visionneuse plein écran */
+.gal{margin-top:10px; min-width:0}
+.gal-h{margin:0 0 6px; font-size:.84rem; color:var(--ink-2)}
+.gal-h span{margin-left:4px}
+.gal-strip{list-style:none; margin:0; padding:0 0 8px; display:flex; gap:6px; overflow-x:auto; scroll-snap-type:x proximity; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch}
+.gal-strip li{flex:none; scroll-snap-align:start}
+.gal-strip a{display:block; border-radius:4px; overflow:hidden}
+.gal-strip a:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.gal-strip img{display:block; height:112px; width:auto; background:var(--tint)}
+.lb{border:0; padding:0; margin:0; width:100vw; height:100vh; height:100dvh; max-width:none; max-height:none; background:#0b1214; color:#f3f5f4; overflow:hidden}
+.lb::backdrop{background:#0b1214}
+.lb-in{display:grid; grid-template-rows:auto minmax(0,1fr) auto; height:100%}
+.lb-top{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:calc(env(safe-area-inset-top,0px) + 6px) 8px 6px 16px; font-size:.82rem; color:#c9d2d0}
+.lb-fig{margin:0; position:relative; display:grid; place-items:center; min-height:0; padding:0 8px; touch-action:pan-y}
+.lb-fig img{max-width:100%; max-height:100%; object-fit:contain; user-select:none}
+.lb-cap{margin:0; padding:10px 16px calc(env(safe-area-inset-bottom,0px) + 14px); text-align:center; font-size:.95rem}
+.lb button{font:inherit; color:#fff; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); border-radius:999px; width:44px; height:44px; display:grid; place-items:center; cursor:pointer}
+.lb button:hover{background:rgba(255,255,255,.22)}
+.lb button:focus-visible{outline:2px solid #fff; outline-offset:2px}
+.lb-nav{position:absolute; top:50%; transform:translateY(-50%)}
+.lb-prev{left:10px} .lb-next{right:10px}
+.lb svg{width:20px; height:20px}
+@media (hover:none){ .lb-nav{background:rgba(0,0,0,.35)} }
 .resa-empty{margin:0; padding:10px 12px; color:var(--ink-2); font-size:.9rem; background:var(--surface); border:1px dashed var(--rule); border-radius:var(--radius)}
 
 /* Pratique */
