@@ -111,10 +111,9 @@
 },
 "baseouest": {
 "isl": "maurice",
-"lon": 57.37,
-"lat": -20.315,
-"name": "Base ouest (Flic-en-Flac, Tamarin ou La Gaulette)",
-"coast": true
+"lon": 57.3575,
+"lat": -20.4245,
+"name": "Maison à La Gaulette (Ayesha)"
 },
 "morne": {
 "isl": "maurice",
@@ -228,7 +227,7 @@
 "isl": "maurice",
 "lon": 57.58,
 "lat": -20.013,
-"name": "Base nord (Grand Baie, Pereybère ou Trou aux Biches)",
+"name": "Base nord (Grand Baie ou Roches Noires)",
 "coast": true
 },
 "pamplemousses": {
