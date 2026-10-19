@@ -368,7 +368,7 @@ LOGEMENTS = [
          note="Appartement face à la plage, accès direct au lagon, rooftop privé. Une chambre derrière une verrière et un canapé convertible dans le séjour (4 couchages annoncés) : une seule vraie chambre pour deux couples. Restaurants et commerces à pied, Grand Baie à quelques minutes ; idéal pour le programme du nord. Frais de ménage à demander."),
     dict(id="lg-noemie", g=2, hote="Noémie", lieu="Olivia (Flacq), dans l'est", debut="2027-05-27", fin="2027-05-30", s="envoyee",
          url="https://www.homeexchange.fr/homes/view/2197387",
-         note="Villa 2 chambres avec lits doubles, jardin clos, parking fermé, wifi, lave-linge. Ménage et conciergerie : 120 € (6 000 roupies) en espèces à l'arrivée. Pas en bord de mer : plages à 15 min, supermarché à Bel Air à 8 min ; île aux Cerfs toute proche, sites du nord plus loin. Eau coupée en journée, réserve suffisante : lessives le soir. Paddles disponibles, prévoir des sangles de toit. Non-fumeur."),
+         note="Pré-approuvée le 19 octobre 2026 : à valider avant le 23 octobre. Villa 2 chambres avec lits doubles, jardin clos, parking fermé, wifi, lave-linge. Ménage et conciergerie : 120 € (6 000 roupies) en espèces à l'arrivée. Pas en bord de mer : plages à 15 min, supermarché à Bel Air à 8 min ; île aux Cerfs toute proche, sites du nord plus loin. Eau coupée en journée, réserve suffisante : lessives le soir. Paddles disponibles, prévoir des sangles de toit. Non-fumeur."),
     dict(id="lg-anahita", g=2, hote="Anahita (resort de golf)", lieu="Beau Champ", debut="", fin="", s="ecartee",
          url="https://www.homeexchange.fr/homes/view/2689240",
          note="Écartée : 8 nuits minimum, services en sus d'environ 50 € par jour."),
