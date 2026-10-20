@@ -134,7 +134,7 @@ DAYS = [
          place="La Gaulette, île aux Bénitiers, plage du Morne", effort="modéré", calm=False,
          travel="Maison → départ du kayak 5 à 15 min · → plage du Morne 15 min",
          acts=[
-             dict(t="08:30", txt="Kayak de mer vers l'île aux Bénitiers", note="Traversée du lagon de 30 à 45 min. Sortie guidée au départ du Morne : environ 2 h 30, dès 43 €, gilet et guide fournis, savoir nager. Ou location sur place : Ayesha doit transmettre le contact d'un moniteur de kitesurf, à interroger sur les kayaks.", s="areserver", id="j6-kayak"),
+             dict(t="08:30", txt="Kayak de mer vers l'île aux Bénitiers", note="Traversée du lagon de 30 à 45 min. Sortie guidée au départ du Morne : environ 2 h 30, dès 43 €, gilet et guide fournis, savoir nager. Ou location sur place : Ayesha nous a transmis le contact d'un moniteur de kitesurf, à interroger sur les kayaks.", s="areserver", id="j6-kayak"),
              dict(t="", txt="Pause baignade sur l'île aux Bénitiers", note="Conseil d'amis : l'île se découvre mieux en kayak qu'en excursion organisée en bateau."),
              dict(t="12:30", txt="Déjeuner à La Gaulette ou au Morne"),
              dict(t="14:30", txt="Plage publique du Morne", note="Longue plage bordée de filaos puis de palmiers, face au Morne Brabant."),
@@ -344,7 +344,7 @@ LG_GROUPS = [
 LOGEMENTS = [
     dict(id="lg-ayesha", g=1, hote="Ayesha", lieu="La Gaulette", debut="2027-05-21", fin="2027-05-27", s="acceptee",
          url="https://www.homeexchange.fr/homes/view/2915027", photos="photos_ayesha.json", photos_dir="logements/ayesha/",
-         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). Arrivée à partir de 16 h le 21 mai, départ avant 9 h 30 le 27 mai (confirmé par Ayesha le 20 octobre). Accès par codes (portail et porte) envoyés peu avant l'arrivée, sans clés ; place de parking dédiée. À l'arrivée : ménage 62 € et taxe MRA 72 €, en roupies ou en euros au taux du jour. Deux lits king size ; eau à économiser. À venir : guide d'accueil et contact d'un moniteur de kitesurf, à interroger aussi sur les kayaks."),
+         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). Arrivée à partir de 16 h le 21 mai, départ avant 9 h 30 le 27 mai (confirmé par Ayesha le 20 octobre). Accès par codes (portail et porte) envoyés peu avant l'arrivée, sans clés ; place de parking dédiée. À l'arrivée : ménage 62 € et taxe MRA 72 €, en roupies ou en euros au taux du jour. Deux lits king size ; eau à économiser. Contact d'un moniteur de kitesurf reçu par WhatsApp, à interroger sur les kayaks. À venir : guide d'accueil et contact d'un loueur de voiture."),
     dict(id="lg-kamaya", g=1, hote="Alice et Alex", lieu="Chamarel (Villa Kamaya)", debut="2027-05-21", fin="2027-05-26", s="ecartee",
          url="https://www.homeexchange.fr/homes/view/3182390",
          note="Écartée : logement confirmé à La Gaulette, demande à retirer sur HomeExchange. Ménage 100 € à partir de 5 nuits. Programme inchangé. Nombre de chambres à vérifier."),
