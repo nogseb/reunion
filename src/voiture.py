@@ -45,7 +45,7 @@ ASSURANCE = [
 ]
 
 RECO = ("Un loueur local qui inclut l'assurance tous risques et le second conducteur, avec remise des clés à l'aéroport, "
-        "en berline ou SUV compact. Maki est le mieux documenté ; Liberta est l'alternative pour le break Corolla et son grand coffre.")
+        "en berline ou SUV compact. Maki est le mieux documenté ; Liberta est l'alternative pour le break Corolla et son grand coffre. Ayesha doit nous transmettre le contact d'un loueur de confiance : à comparer à ces repères.")
 
 A_CONFIRMER = [
     "Montant de la franchise et exclusions (pneus, vitres, dessous de caisse)",

@@ -177,7 +177,7 @@ DAYS = [
          place="La Gaulette, Trou d'Eau Douce, île aux Cerfs, côte nord", effort="facile", calm=False,
          travel="La Gaulette → Trou d'Eau Douce environ 1 h 30 · Trou d'Eau Douce → base nord environ 50 min",
          acts=[
-             dict(t="08:30", txt="Départ de La Gaulette", note="Remise des clés selon les consignes d'Ayesha."),
+             dict(t="08:30", txt="Départ de La Gaulette", note="Accès par codes, sans clés à rendre : suivre les consignes de départ d'Ayesha."),
              dict(t="10:00", txt="Navette lente pour l'île aux Cerfs", note="Bateau-taxi depuis Trou d'Eau Douce, toutes les 20 minutes environ dès 8 h 30, traversée de 20 à 30 minutes. Environ 300 à 500 roupies aller-retour par personne (6 à 9 €), sans réservation. Dernier retour vers 16 h. Selon votre guide : prendre l'une des premières navettes, s'éloigner du débarcadère et repartir en début d'après-midi ; c'est pour cela qu'elle passe un jeudi plutôt qu'un samedi."),
              dict(t="", txt="En bonus : kayak sur le lagon, si la mer est calme", note="Location sur l'île ou à Trou d'Eau Douce, prix à négocier sur place. Le plus simple : pagayer côté lagon vers la plage des Flibustiers, au sud de l'île, plus calme. La traversée en kayak depuis Trou d'Eau Douce (3 à 4 km, vent de face à l'aller) seulement par mer plate et tôt le matin, en longeant la côte, à l'écart du chenal des navettes. Gilet, sac étanche, savoir nager.", s="optionnel", id="j9-kayak"),
              dict(t="13:45", txt="Navette retour et déjeuner à Trou d'Eau Douce"),
@@ -344,7 +344,7 @@ LG_GROUPS = [
 LOGEMENTS = [
     dict(id="lg-ayesha", g=1, hote="Ayesha", lieu="La Gaulette", debut="2027-05-21", fin="2027-05-27", s="acceptee",
          url="https://www.homeexchange.fr/homes/view/2915027", photos="photos_ayesha.json", photos_dir="logements/ayesha/",
-         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). En espèces à l'arrivée : ménage 62 € et taxe MRA 72 €. Deux lits king size ; eau à économiser. Clés, stationnement et kayaks : questions posées à Ayesha."),
+         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). Dates à revérifier : Ayesha a écrit « 21-26 mai ». Accès par codes (portail et porte) envoyés peu avant l'arrivée, sans clés ; place de parking dédiée. À l'arrivée : ménage 62 € et taxe MRA 72 €, en roupies ou en euros au taux du jour. Deux lits king size ; eau à économiser. À venir : guide d'accueil et contact d'un loueur de voiture recommandé. Kayaks : question à reposer."),
     dict(id="lg-kamaya", g=1, hote="Alice et Alex", lieu="Chamarel (Villa Kamaya)", debut="2027-05-21", fin="2027-05-26", s="ecartee",
          url="https://www.homeexchange.fr/homes/view/3182390",
          note="Écartée : logement confirmé à La Gaulette, demande à retirer sur HomeExchange. Ménage 100 € à partir de 5 nuits. Programme inchangé. Nombre de chambres à vérifier."),
