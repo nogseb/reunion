@@ -94,7 +94,7 @@ DAYS = [
              dict(t="12:00", txt="Biscuiterie Rault, à Mahébourg", note="Fabrication des biscuits de manioc et dégustation. Horaires à vérifier sur place.", s="optionnel", id="j3-rault"),
              dict(t="12:45", txt="Déjeuner sur le front de mer de Mahébourg"),
              dict(t="14:00", txt="Bateau à fond de verre et snorkeling à Blue Bay", note="Parc marin, environ 1 h, dès 24 € par personne, masque et tuba fournis.", s="optionnel", id="j3-bluebay"),
-             dict(t="16:00", txt="Route vers La Gaulette et installation chez Ayesha", note="Échange HomeExchange confirmé : 6 nuits, du 21 au 27 mai, arrivée vers 17 h. Ménage 62 € et taxe MRA 72 € à régler en espèces à l'arrivée ; eau à économiser.", s="reserve", id="j3-baseouest", link=("#lg-ayesha", "Voir les photos de la maison")),
+             dict(t="16:00", txt="Route vers La Gaulette et installation chez Ayesha", note="Échange HomeExchange confirmé : 6 nuits, du 21 au 27 mai ; accès à partir de 16 h, arrivée vers 17 h. Ménage 62 € et taxe MRA 72 € à régler en espèces à l'arrivée ; eau à économiser.", s="reserve", id="j3-baseouest", link=("#lg-ayesha", "Voir les photos de la maison")),
          ],
          tip="Premiers kilomètres à gauche : évitez Port-Louis aujourd'hui. Peu de restaurants à La Gaulette, mais un supermarché : faites les courses en route.",
          planb="Mer agitée à Blue Bay : visite guidée de la vallée de Ferney à 13 h 30, forêt primaire, environ 2 h, 1 150 MUR, sur réservation.",
@@ -134,7 +134,7 @@ DAYS = [
          place="La Gaulette, île aux Bénitiers, plage du Morne", effort="modéré", calm=False,
          travel="Maison → départ du kayak 5 à 15 min · → plage du Morne 15 min",
          acts=[
-             dict(t="08:30", txt="Kayak de mer vers l'île aux Bénitiers", note="Traversée du lagon de 30 à 45 min. Sortie guidée au départ du Morne : environ 2 h 30, dès 43 €, gilet et guide fournis, savoir nager. Ou location sur place, si votre hôte ou un loueur de La Gaulette en propose.", s="areserver", id="j6-kayak"),
+             dict(t="08:30", txt="Kayak de mer vers l'île aux Bénitiers", note="Traversée du lagon de 30 à 45 min. Sortie guidée au départ du Morne : environ 2 h 30, dès 43 €, gilet et guide fournis, savoir nager. Ou location sur place : Ayesha doit transmettre le contact d'un moniteur de kitesurf, à interroger sur les kayaks.", s="areserver", id="j6-kayak"),
              dict(t="", txt="Pause baignade sur l'île aux Bénitiers", note="Conseil d'amis : l'île se découvre mieux en kayak qu'en excursion organisée en bateau."),
              dict(t="12:30", txt="Déjeuner à La Gaulette ou au Morne"),
              dict(t="14:30", txt="Plage publique du Morne", note="Longue plage bordée de filaos puis de palmiers, face au Morne Brabant."),
@@ -177,7 +177,7 @@ DAYS = [
          place="La Gaulette, Trou d'Eau Douce, île aux Cerfs, côte nord", effort="facile", calm=False,
          travel="La Gaulette → Trou d'Eau Douce environ 1 h 30 · Trou d'Eau Douce → base nord environ 50 min",
          acts=[
-             dict(t="08:30", txt="Départ de La Gaulette", note="Accès par codes, sans clés à rendre : suivre les consignes de départ d'Ayesha."),
+             dict(t="08:30", txt="Départ de La Gaulette", note="Départ avant 9 h 30. Accès par codes, sans clés à rendre : suivre les consignes de départ d'Ayesha."),
              dict(t="10:00", txt="Navette lente pour l'île aux Cerfs", note="Bateau-taxi depuis Trou d'Eau Douce, toutes les 20 minutes environ dès 8 h 30, traversée de 20 à 30 minutes. Environ 300 à 500 roupies aller-retour par personne (6 à 9 €), sans réservation. Dernier retour vers 16 h. Selon votre guide : prendre l'une des premières navettes, s'éloigner du débarcadère et repartir en début d'après-midi ; c'est pour cela qu'elle passe un jeudi plutôt qu'un samedi."),
              dict(t="", txt="En bonus : kayak sur le lagon, si la mer est calme", note="Location sur l'île ou à Trou d'Eau Douce, prix à négocier sur place. Le plus simple : pagayer côté lagon vers la plage des Flibustiers, au sud de l'île, plus calme. La traversée en kayak depuis Trou d'Eau Douce (3 à 4 km, vent de face à l'aller) seulement par mer plate et tôt le matin, en longeant la côte, à l'écart du chenal des navettes. Gilet, sac étanche, savoir nager.", s="optionnel", id="j9-kayak"),
              dict(t="13:45", txt="Navette retour et déjeuner à Trou d'Eau Douce"),
@@ -338,13 +338,13 @@ LABELS = {
 LG_ST = {"envoyee": "Demande envoyée", "acceptee": "Acceptée", "refusee": "Refusée", "ecartee": "Écartée"}
 LG_ORDER = ["envoyee", "acceptee", "refusee", "ecartee"]
 LG_GROUPS = [
-    (1, "Maison 1 · ouest et sud", "Arrivée le vendredi 21 mai vers 17 h, départ le jeudi 27 mai vers 8 h 30."),
+    (1, "Maison 1 · ouest et sud", "Arrivée à partir de 16 h le vendredi 21 mai, départ avant 9 h 30 le jeudi 27 mai."),
     (2, "Maison 2 · nord et est", "Départ le dimanche 30 mai ; vol à 18 h 20, départ tardif demandé."),
 ]
 LOGEMENTS = [
     dict(id="lg-ayesha", g=1, hote="Ayesha", lieu="La Gaulette", debut="2027-05-21", fin="2027-05-27", s="acceptee",
          url="https://www.homeexchange.fr/homes/view/2915027", photos="photos_ayesha.json", photos_dir="logements/ayesha/",
-         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). Dates à revérifier : Ayesha a écrit « 21-26 mai ». Accès par codes (portail et porte) envoyés peu avant l'arrivée, sans clés ; place de parking dédiée. À l'arrivée : ménage 62 € et taxe MRA 72 €, en roupies ou en euros au taux du jour. Deux lits king size ; eau à économiser. À venir : guide d'accueil et contact d'un loueur de voiture recommandé. Kayaks : question à reposer."),
+         note="Échange confirmé le 19 octobre 2026 : 6 nuits contre GuestPoints (224 GP par nuit, soit 1 344 GP). Arrivée à partir de 16 h le 21 mai, départ avant 9 h 30 le 27 mai (confirmé par Ayesha le 20 octobre). Accès par codes (portail et porte) envoyés peu avant l'arrivée, sans clés ; place de parking dédiée. À l'arrivée : ménage 62 € et taxe MRA 72 €, en roupies ou en euros au taux du jour. Deux lits king size ; eau à économiser. À venir : guide d'accueil et contact d'un moniteur de kitesurf, à interroger aussi sur les kayaks."),
     dict(id="lg-kamaya", g=1, hote="Alice et Alex", lieu="Chamarel (Villa Kamaya)", debut="2027-05-21", fin="2027-05-26", s="ecartee",
          url="https://www.homeexchange.fr/homes/view/3182390",
          note="Écartée : logement confirmé à La Gaulette, demande à retirer sur HomeExchange. Ménage 100 € à partir de 5 nuits. Programme inchangé. Nombre de chambres à vérifier."),
